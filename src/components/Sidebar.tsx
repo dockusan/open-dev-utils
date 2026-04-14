@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, MessageSquare } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import {
   CATEGORY_LABELS,
@@ -21,7 +21,7 @@ export function Sidebar() {
     <aside className="w-60 flex-shrink-0 bg-gray-50 dark:bg-[#0e1117] flex flex-col border-r border-gray-200 dark:border-[#1e2329] transition-colors">
       <div className="px-3 py-4 border-b border-gray-200 dark:border-[#1e2329] flex flex-col gap-3">
         <div className="flex items-center justify-between px-1">
-          <h1 className="text-md font-bold text-gray-900 dark:text-gray-100">DevUtils</h1>
+          <h1 className="text-md font-bold text-gray-900 dark:text-gray-100">OpenDevUtils</h1>
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="p-1.5 rounded-md text-gray-500 hover:bg-gray-200 dark:hover:bg-[#161b22] dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
@@ -74,6 +74,15 @@ export function Sidebar() {
           })
         )}
       </nav>
+      <div className="px-3 py-3 border-t border-gray-200 dark:border-[#1e2329]">
+        <a
+          href="mailto:anhduc09t1@gmail.com?subject=OpenDevUtils Feedback"
+          className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-[#161b22] dark:hover:text-gray-100 rounded-md transition-colors"
+        >
+          <MessageSquare size={14} />
+          <span>Send Feedback</span>
+        </a>
+      </div>
     </aside>
   );
 }
