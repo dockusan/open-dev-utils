@@ -1,0 +1,42 @@
+    Checking tauri-appdevutils v0.1.0 (/Users/ducanguyen/THREAD/devutils/src-tauri)
+error[E0425]: cannot find function `init` in crate `tauri_plugin_updater`
+  --> src/lib.rs:15:39
+   |
+15 |         .plugin(tauri_plugin_updater::init())
+   |                                       ^^^^ not found in `tauri_plugin_updater`
+   |
+help: consider importing one of these functions
+   |
+ 1 + use tauri_plugin_dialog::init;
+   |
+ 1 + use tauri_plugin_opener::init;
+   |
+help: if you import `init`, refer to it directly
+   |
+15 -         .plugin(tauri_plugin_updater::init())
+15 +         .plugin(init())
+   |
+
+error[E0277]: `?` couldn't convert the error to `tauri::Error`
+  --> src/lib.rs:70:27
+   |
+70 |     match handle.updater()?.check().await {
+   |                  ---------^ the trait `From<tauri_plugin_updater::Error>` is not implemented for `tauri::Error`
+   |                  |
+   |                  this can't be annotated with `?` because it has type `Result<_, tauri_plugin_updater::Error>`
+   |
+   = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+   = help: the following other types implement trait `From<T>`:
+             `tauri::Error` implements `From<anyhow::Error>`
+             `tauri::Error` implements `From<getrandom::error::Error>`
+             `tauri::Error` implements `From<glob::PatternError>`
+             `tauri::Error` implements `From<muda::error::Error>`
+             `tauri::Error` implements `From<muda::icon::BadIcon>`
+             `tauri::Error` implements `From<raw_window_handle::HandleError>`
+             `tauri::Error` implements `From<serde_json::Error>`
+             `tauri::Error` implements `From<std::io::Error>`
+           and 3 others
+
+Some errors have detailed explanations: E0277, E0425.
+For more information about an error, try `rustc --explain E0277`.
+error: could not compile `tauri-appdevutils` (lib) due to 2 previous errors
