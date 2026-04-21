@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react';
 import JSONEditorReact from '../components/JSONEditorReact';
-import { ToolLayout } from '../components/ToolLayout';
 
 export function JsonFormatter({ toolId }: { toolId: string }) {
   const [content, setContent] = useState({
@@ -13,20 +12,17 @@ export function JsonFormatter({ toolId }: { toolId: string }) {
     }
   });
 
-  const handleChange = useCallback((newContent: any, _previousContent: any, _patchResult: any) => {
+  const handleChange = useCallback((newContent: any) => {
     setContent(newContent);
   }, []);
 
   return (
-    <ToolLayout toolId={toolId}>
-      {/* Set the wrapper height to full so the editor can flex and scroll properly */}
-      <div className="h-full w-full">
-        <JSONEditorReact 
-          content={content} 
-          onChange={handleChange}
-          className="h-full w-full"
-        />
-      </div>
-    </ToolLayout>
+    <div id={toolId} className="surface-lowest shell-border h-full w-full overflow-hidden rounded-sm border">
+      <JSONEditorReact
+        content={content}
+        onChange={handleChange}
+        className="h-full w-full"
+      />
+    </div>
   );
 }

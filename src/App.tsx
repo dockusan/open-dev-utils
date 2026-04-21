@@ -1,5 +1,6 @@
-import { createHashRouter, RouterProvider, Navigate } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from './components/Layout';
+import { ToolLayout } from './components/ToolLayout';
 import { Placeholder } from './tools/Placeholder';
 import { JsonFormatter } from './tools/JsonFormatter';
 import { HtmlBeautifier } from './tools/HtmlBeautifier';
@@ -45,6 +46,9 @@ import { CronParser } from './tools/CronParser';
 import { ColorConverter } from './tools/ColorConverter';
 import { JsonRepair } from './tools/JsonRepair';
 import { TOOLS } from './lib/registry';
+import { WorkspaceHome } from './screens/WorkspaceHome';
+import { SettingsScreen } from './screens/SettingsScreen';
+import { LandingPage } from './screens/LandingPage';
 
 const TOOL_COMPONENTS: Partial<Record<string, React.ReactElement>> = {
   'json-formatter': <JsonFormatter toolId="json-formatter" />,
@@ -92,20 +96,25 @@ const TOOL_COMPONENTS: Partial<Record<string, React.ReactElement>> = {
   'json-repair': <JsonRepair toolId="json-repair" />,
 };
 
-// Hash router works reliably under the tauri:// scheme
+function withToolChrome(toolId: string, element: React.ReactElement) {
+  return <ToolLayout toolId={toolId}>{element}</ToolLayout>;
+}
+
 const router = createHashRouter([
+  {
+    path: '/landing',
+    element: <LandingPage />,
+  },
   {
     path: '/',
     element: <Layout />,
     children: [
-      { index: true, element: <Navigate to="/json-formatter" replace /> },
-      ...TOOLS.map((tool) => {
-        const component = TOOL_COMPONENTS[tool.id] ?? <Placeholder toolId={tool.id} />;
-        return {
-          path: tool.id,
-          element: component,
-        };
-      }),
+      { index: true, element: <WorkspaceHome /> },
+      { path: 'settings', element: <SettingsScreen /> },
+      ...TOOLS.map((tool) => ({
+        path: tool.id,
+        element: withToolChrome(tool.id, TOOL_COMPONENTS[tool.id] ?? <Placeholder toolId={tool.id} />),
+      })),
     ],
   },
 ]);
