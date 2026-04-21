@@ -46,11 +46,10 @@ export function ColorConverter({ toolId }: { toolId: string }) {
   };
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col items-center gap-12 max-w-xl mx-auto">
-      <h2 className="text-2xl font-bold">Color Converter</h2>
+    <div id={toolId} className="mx-auto flex h-full max-w-xl flex-col items-center gap-8">
       
       <div 
-        className="w-full aspect-video rounded-sm border shadow-lg transition-colors border-border/50" 
+        className="w-full aspect-video rounded-sm border border-white/10 shadow-lg transition-colors" 
         style={{ backgroundColor: hex }}
       />
 
@@ -66,7 +65,7 @@ export function ColorConverter({ toolId }: { toolId: string }) {
         <div className="space-y-2">
           <Label>RGB</Label>
           <div className="flex gap-2">
-            <Input readOnly value={rgb} className="font-mono h-12 bg-muted/20" />
+            <Input readOnly value={rgb} className="h-12 bg-black/10 font-mono" />
             <CopyButton value={rgb} />
           </div>
         </div>
@@ -74,7 +73,7 @@ export function ColorConverter({ toolId }: { toolId: string }) {
         <div className="space-y-2">
           <Label>HSL</Label>
           <div className="flex gap-2">
-            <Input readOnly value={hsl} className="font-mono h-12 bg-muted/20" />
+            <Input readOnly value={hsl} className="h-12 bg-black/10 font-mono" />
             <CopyButton value={hsl} />
           </div>
         </div>

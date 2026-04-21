@@ -43,9 +43,8 @@ export function QrCodeGenerator({ toolId }: { toolId: string }) {
   };
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
+    <div id={toolId} className="mx-auto flex h-full max-w-5xl flex-col gap-8 md:flex-row">
       <div className="flex-1 space-y-6">
-        <h2 className="text-2xl font-bold">QR Code Generator</h2>
         <div className="space-y-2">
           <Label htmlFor="qr-input">Text or URL</Label>
           <Input 
@@ -66,11 +65,13 @@ export function QrCodeGenerator({ toolId }: { toolId: string }) {
         </div>
       </div>
 
-      <div className="w-[400px] h-[400px] bg-white rounded-sm border shadow-inner flex items-center justify-center overflow-hidden">
+      <div className="surface-low flex h-[400px] w-[400px] items-center justify-center overflow-hidden rounded-sm border border-white/10 p-4">
         {dataUrl ? (
-          <img src={dataUrl} alt="QR Code" className="w-full h-full object-contain" />
+          <div className="flex h-full w-full items-center justify-center rounded-sm bg-white p-4">
+            <img src={dataUrl} alt="QR Code" className="h-full w-full object-contain" />
+          </div>
         ) : (
-          <div className="text-muted-foreground italic">Enter text to generate</div>
+          <div className="italic text-[rgb(193,198,215)]/70">Enter text to generate</div>
         )}
       </div>
     </div>

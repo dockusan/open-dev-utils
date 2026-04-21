@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JSON Formatter - DevUtils</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#272841",
+                    "primary-fixed-dim": "#aec6ff",
+                    "surface-bright": "#373751",
+                    "on-tertiary-fixed": "#0d1c2e",
+                    "secondary-fixed-dim": "#8cd2da",
+                    "secondary": "#8cd2da",
+                    "on-secondary-container": "#8bd2d9",
+                    "on-surface-variant": "#c1c6d7",
+                    "primary": "#aec6ff",
+                    "inverse-on-surface": "#2e2e47",
+                    "error": "#ffb4ab",
+                    "tertiary": "#b9c7df",
+                    "on-primary": "#002e6b",
+                    "surface-container": "#1d1d36",
+                    "tertiary-fixed-dim": "#b9c7df",
+                    "background": "#111129",
+                    "on-primary-fixed-variant": "#004397",
+                    "on-primary-fixed": "#001a43",
+                    "on-error-container": "#ffdad6",
+                    "surface-variant": "#32324c",
+                    "surface": "#111129",
+                    "surface-container-highest": "#32324c",
+                    "primary-container": "#0070f3",
+                    "inverse-primary": "#0059c5",
+                    "on-secondary-fixed": "#002022",
+                    "on-tertiary-fixed-variant": "#3a485b",
+                    "on-secondary": "#00363b",
+                    "surface-tint": "#aec6ff",
+                    "secondary-fixed": "#a7eef6",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#0b0b23",
+                    "on-surface": "#e2dfff",
+                    "tertiary-container": "#69778c",
+                    "on-background": "#e2dfff",
+                    "secondary-container": "#005c63",
+                    "surface-container-low": "#191931",
+                    "on-secondary-fixed-variant": "#004f55",
+                    "outline": "#8b90a0",
+                    "outline-variant": "#414754",
+                    "on-primary-container": "#ffffff",
+                    "inverse-surface": "#e2dfff",
+                    "on-tertiary": "#233144",
+                    "tertiary-fixed": "#d5e3fc",
+                    "on-tertiary-container": "#ffffff",
+                    "on-error": "#690005",
+                    "surface-dim": "#111129",
+                    "primary-fixed": "#d8e2ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"],
+                    "mono": ["JetBrains Mono", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body h-screen w-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-[#191931] dark:bg-[#191931] text-[#0070F3] font-['Inter'] text-sm font-medium h-full w-64 tonal-transition-right bg-[#0b0b23] flat hidden md:flex flex-col p-2 space-y-1 flex-shrink-0 z-20">
+<!-- Header -->
+<div class="flex items-center px-3 py-4 mb-2">
+<div class="h-8 w-8 rounded-DEFAULT bg-primary-container flex items-center justify-center text-on-primary-container font-bold mr-3 flex-shrink-0">
+                W
+            </div>
+<div class="flex flex-col">
+<span class="text-on-surface font-bold text-sm">Workspace</span>
+<span class="text-on-surface-variant text-xs">Pro Plan</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="bg-primary-container text-on-primary-container rounded-DEFAULT py-2 px-3 mx-2 mb-4 flex items-center justify-center text-sm font-medium hover:bg-inverse-primary transition-colors duration-150">
+<span class="material-symbols-outlined mr-2 text-[18px]">add</span>
+            New Tool
+        </button>
+<!-- Tabs -->
+<div class="flex-grow space-y-1 overflow-y-auto">
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 flex items-center px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">grid_view</span>
+                All Tools
+            </a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 flex items-center px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">star</span>
+                Favorites
+            </a>
+<a class="bg-[#373751] text-white rounded-sm ease-out duration-150 flex items-center px-3 py-2" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">code</span>
+                JSON Formatter
+            </a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 flex items-center px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">swap_horiz</span>
+                Base64
+            </a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 flex items-center px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">search_check</span>
+                RegEx Tester
+            </a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 flex items-center px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">difference</span>
+                Diff Viewer
+            </a>
+</div>
+<!-- Footer Tabs -->
+<div class="mt-auto pt-4 space-y-1 border-t border-outline-variant/15">
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 flex items-center px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">menu_book</span>
+                Docs
+            </a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 flex items-center px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">chat_bubble</span>
+                Feedback
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 bg-background relative z-10">
+<!-- TopNavBar (Web) -->
+<header class="bg-[#111129] dark:bg-[#111129] text-[#0070F3] font-['Inter'] font-medium text-xs tracking-tight uppercase docked full-width top-0 bg-[#191931] tonal-shift-bottom flat no-shadows flex justify-between items-center h-12 px-4 w-full flex-shrink-0 z-20 md:flex hidden">
+<!-- Brand -->
+<div class="flex items-center space-x-4">
+<div class="text-sm font-bold tracking-tighter text-slate-100">DevUtils</div>
+<!-- Nav Links -->
+<nav class="flex space-x-4 ml-6">
+<a class="text-[#0070F3] border-b-2 border-[#0070F3] pb-1 scale-95 active:opacity-80 transition-all" href="#">Format</a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded-sm scale-95 active:opacity-80 transition-all" href="#">Convert</a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded-sm scale-95 active:opacity-80 transition-all" href="#">Inspect</a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded-sm scale-95 active:opacity-80 transition-all" href="#">Generate</a>
+</nav>
+</div>
+<!-- Actions -->
+<div class="flex items-center space-x-2">
+<button class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1.5 rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+</button>
+<button class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1.5 rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</button>
+<button class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1.5 rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">keyboard_command_key</span>
+</button>
+</div>
+</header>
+<!-- Tool Workspace -->
+<main class="flex-1 flex flex-col min-h-0 bg-background p-4 md:p-6 lg:p-8">
+<!-- Tool Header & Actions -->
+<div class="flex justify-between items-end mb-6">
+<div>
+<h1 class="text-on-surface font-bold text-2xl tracking-tight mb-1">JSON Formatter</h1>
+<p class="text-on-surface-variant text-sm">Format, validate, and minify JSON data.</p>
+</div>
+<div class="flex space-x-2">
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-3 py-1.5 rounded-DEFAULT text-sm font-medium flex items-center transition-colors duration-150 border border-outline-variant/15">
+<span class="material-symbols-outlined mr-1.5 text-[16px]">backspace</span>
+                        Clear
+                    </button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-3 py-1.5 rounded-DEFAULT text-sm font-medium flex items-center transition-colors duration-150 border border-outline-variant/15">
+<span class="material-symbols-outlined mr-1.5 text-[16px]">compress</span>
+                        Minify
+                    </button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-3 py-1.5 rounded-DEFAULT text-sm font-medium flex items-center transition-colors duration-150 border border-outline-variant/15">
+<span class="material-symbols-outlined mr-1.5 text-[16px]">content_copy</span>
+                        Copy
+                    </button>
+<button class="bg-primary-container text-on-primary-container px-4 py-1.5 rounded-DEFAULT text-sm font-medium flex items-center hover:bg-inverse-primary transition-colors duration-150 bg-gradient-to-br from-primary to-primary-container">
+<span class="material-symbols-outlined mr-1.5 text-[16px]">format_align_left</span>
+                        Format
+                    </button>
+</div>
+</div>
+<!-- Dual Editor Layout -->
+<div class="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+<!-- Input Pane -->
+<div class="flex-1 flex flex-col min-h-0 bg-surface-container-low rounded-DEFAULT border border-outline-variant/15 overflow-hidden shadow-sm relative group">
+<div class="h-8 bg-surface-container flex items-center px-3 border-b border-outline-variant/15 justify-between">
+<span class="text-xs font-semibold tracking-wider text-on-surface-variant uppercase">Input</span>
+<div class="flex space-x-1">
+<button class="text-on-surface-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">file_upload</span>
+</button>
+</div>
+</div>
+<div class="flex-1 flex min-h-0 bg-surface-container-lowest font-mono text-[13px] leading-relaxed">
+<!-- Line Numbers -->
+<div class="w-10 bg-surface-container-low border-r border-outline-variant/15 flex flex-col items-end py-3 pr-2 text-on-surface-variant/50 select-none overflow-hidden">
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+<span>7</span>
+</div>
+<!-- Code Area -->
+<textarea class="flex-1 bg-transparent border-none text-on-surface p-3 resize-none focus:ring-0 w-full h-full" placeholder="Paste your JSON here..." spellcheck="false">{"user":{"id":123,"name":"Alice","roles":["admin","editor"],"settings":{"theme":"dark","notifications":true}}}</textarea>
+</div>
+</div>
+<!-- Swap Button (Mobile hidden, Web visible) -->
+<div class="hidden lg:flex items-center justify-center -mx-2 z-10">
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface h-8 w-8 rounded-DEFAULT flex items-center justify-center border border-outline-variant/15 shadow-sm transition-colors duration-150">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+</button>
+</div>
+<!-- Output Pane -->
+<div class="flex-1 flex flex-col min-h-0 bg-surface-container-low rounded-DEFAULT border border-outline-variant/15 overflow-hidden shadow-sm relative group">
+<div class="h-8 bg-surface-container flex items-center px-3 border-b border-outline-variant/15 justify-between">
+<span class="text-xs font-semibold tracking-wider text-on-surface-variant uppercase">Output</span>
+<div class="flex items-center space-x-3">
+<span class="text-[10px] text-secondary bg-secondary/10 px-1.5 py-0.5 rounded-sm font-mono">Valid JSON</span>
+<div class="flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-on-surface p-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface p-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex-1 flex min-h-0 bg-surface-container-lowest font-mono text-[13px] leading-relaxed overflow-auto">
+<!-- Line Numbers -->
+<div class="w-10 bg-surface-container-low border-r border-outline-variant/15 flex flex-col items-end py-3 pr-2 text-on-surface-variant/50 select-none overflow-hidden sticky left-0 z-10">
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+<span>7</span>
+<span>8</span>
+<span>9</span>
+<span>10</span>
+<span>11</span>
+<span>12</span>
+</div>
+<!-- Syntax Highlighted Output -->
+<div class="p-3 w-full whitespace-pre font-mono text-on-surface">
+<span class="text-on-surface-variant">{</span>
+<span class="text-secondary">"user"</span><span class="text-on-surface-variant">:</span> <span class="text-on-surface-variant">{</span>
+<span class="text-secondary">"id"</span><span class="text-on-surface-variant">:</span> <span class="text-tertiary">123</span><span class="text-on-surface-variant">,</span>
+<span class="text-secondary">"name"</span><span class="text-on-surface-variant">:</span> <span class="text-primary-fixed-dim">"Alice"</span><span class="text-on-surface-variant">,</span>
+<span class="text-secondary">"roles"</span><span class="text-on-surface-variant">:</span> <span class="text-on-surface-variant">[</span>
+<span class="text-primary-fixed-dim">"admin"</span><span class="text-on-surface-variant">,</span>
+<span class="text-primary-fixed-dim">"editor"</span>
+<span class="text-on-surface-variant">],</span>
+<span class="text-secondary">"settings"</span><span class="text-on-surface-variant">:</span> <span class="text-on-surface-variant">{</span>
+<span class="text-secondary">"theme"</span><span class="text-on-surface-variant">:</span> <span class="text-primary-fixed-dim">"dark"</span><span class="text-on-surface-variant">,</span>
+<span class="text-secondary">"notifications"</span><span class="text-on-surface-variant">:</span> <span class="text-tertiary">true</span>
+<span class="text-on-surface-variant">}</span>
+<span class="text-on-surface-variant">}</span>
+<span class="text-on-surface-variant">}</span></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0b0b23] dark:bg-[#0b0b23] text-[#0070F3] font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest docked full-width bottom-0 h-6 border-t border-[#373751]/15 flat flex justify-between items-center px-3 w-full flex-shrink-0 z-20 hidden md:flex">
+<div class="text-slate-500">DevUtils v2.4.0 • Connected</div>
+<div class="flex space-x-4">
+<a class="text-slate-500 hover:text-slate-300" href="#">System Status</a>
+<a class="text-slate-500 hover:text-slate-300" href="#">API Reference</a>
+</div>
+</footer>
+</div>
+</body></html>

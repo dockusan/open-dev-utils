@@ -1,15 +1,15 @@
-import { TOOLS } from '../lib/registry';
-import { ToolLayout } from '../components/ToolLayout';
+import { getToolById } from '../lib/registry';
 
 export function Placeholder({ toolId }: { toolId: string }) {
-  const tool = TOOLS.find(t => t.id === toolId);
+  const tool = getToolById(toolId);
+
   return (
-    <ToolLayout toolId={toolId}>
-      <div className="flex flex-col items-center justify-center h-full gap-2 text-gray-500 dark:text-gray-400">
-        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-300">{tool?.name ?? toolId}</h2>
-        <p className="text-sm">{tool?.description}</p>
-        <p className="text-xs text-gray-400 dark:text-gray-600 mt-2">Implementation coming soon.</p>
-      </div>
-    </ToolLayout>
+    <div className="flex h-full flex-col items-center justify-center rounded-sm border border-dashed border-white/15 bg-black/10 px-6 text-center">
+      <h2 className="text-xl font-semibold text-white">{tool?.name ?? toolId}</h2>
+      <p className="mt-2 text-sm text-[rgb(193,198,215)]">{tool?.description}</p>
+      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[rgb(193,198,215)]/55">
+        Implementation coming soon
+      </p>
+    </div>
   );
 }

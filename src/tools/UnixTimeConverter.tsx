@@ -41,12 +41,10 @@ export function UnixTimeConverter({ toolId }: { toolId: string }) {
   const setCurrent = () => setInput(Math.floor(Date.now() / 1000).toString());
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col gap-8 max-w-2xl mx-auto">
-      <h2 className="text-2xl font-bold">Unix Time Converter</h2>
-      
-      <div className="space-y-4">
+    <div id={toolId} className="mx-auto flex h-full max-w-4xl flex-col gap-6">
+      <div className="surface-low rounded-sm border border-white/10 p-5">
         <Label>Unix Timestamp (seconds)</Label>
-        <div className="flex gap-2">
+        <div className="mt-3 flex gap-2">
           <Input 
             value={input} 
             onChange={(e) => setInput(e.target.value)}
@@ -56,18 +54,26 @@ export function UnixTimeConverter({ toolId }: { toolId: string }) {
         </div>
       </div>
 
-      <div className="space-y-4 pt-6 border-t">
-        <Label>Date Information</Label>
-        <Textarea 
-          readOnly 
-          value={output} 
-          className="h-48 font-mono bg-muted/20 resize-none"
-        />
-        <div className="flex justify-end">
-          <CopyButton value={output} />
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="surface-low rounded-sm border border-white/10 p-4">
+          <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[rgb(193,198,215)]">Structured output</div>
+          <Textarea 
+            readOnly 
+            value={output} 
+            className="h-64 resize-none border-0 bg-transparent font-mono"
+          />
+        </div>
+        <div className="surface-low rounded-sm border border-white/10 p-4">
+          <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[rgb(193,198,215)]">Actions</div>
+          <div className="flex items-center justify-between rounded-sm border border-white/10 bg-black/10 px-4 py-3">
+            <div>
+              <div className="text-sm font-medium text-white">Copy current payload</div>
+              <div className="text-sm text-[rgb(193,198,215)]">ISO, local, UTC, and relative time</div>
+            </div>
+            <CopyButton value={output} />
+          </div>
         </div>
       </div>
     </div>
   );
 }
-

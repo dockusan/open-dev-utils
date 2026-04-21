@@ -24,9 +24,8 @@ export function UuidGenerator({ toolId }: { toolId: string }) {
   }, [generate]);
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col gap-8 max-w-2xl mx-auto">
-      <div className="flex items-center justify-between mb-2">
-        <h2 className="text-2xl font-bold">Identifiers</h2>
+    <div id={toolId} className="mx-auto flex h-full max-w-2xl flex-col gap-8">
+      <div className="mb-2 flex items-center justify-end">
         <Button onClick={generate} variant="outline" size="sm" className="gap-2">
           <RefreshCw className="h-4 w-4" />
           Regenerate All

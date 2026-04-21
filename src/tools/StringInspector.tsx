@@ -30,9 +30,7 @@ export function StringInspector({ toolId }: { toolId: string }) {
   }, [input, analyze]);
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col gap-8 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold">String Inspector</h2>
-      
+    <div id={toolId} className="mx-auto flex h-full max-w-4xl flex-col gap-8">
       <div className="space-y-4">
         <Label>Input Text</Label>
         <Textarea 
@@ -43,22 +41,22 @@ export function StringInspector({ toolId }: { toolId: string }) {
         />
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t">
-        <div className="p-6 bg-muted/20 rounded-sm border flex flex-col items-center">
+      <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+        <div className="surface-low flex flex-col items-center rounded-sm border border-white/10 p-6">
           <div className="text-3xl font-bold mb-1">{stats.chars}</div>
-          <div className="text-xs text-muted-foreground uppercase font-semibold">Characters</div>
+          <div className="text-xs font-semibold uppercase text-[rgb(193,198,215)]/70">Characters</div>
         </div>
-        <div className="p-6 bg-muted/20 rounded-sm border flex flex-col items-center">
+        <div className="surface-low flex flex-col items-center rounded-sm border border-white/10 p-6">
           <div className="text-3xl font-bold mb-1">{stats.words}</div>
-          <div className="text-xs text-muted-foreground uppercase font-semibold">Words</div>
+          <div className="text-xs font-semibold uppercase text-[rgb(193,198,215)]/70">Words</div>
         </div>
-        <div className="p-6 bg-muted/20 rounded-sm border flex flex-col items-center">
+        <div className="surface-low flex flex-col items-center rounded-sm border border-white/10 p-6">
           <div className="text-3xl font-bold mb-1">{stats.lines}</div>
-          <div className="text-xs text-muted-foreground uppercase font-semibold">Lines</div>
+          <div className="text-xs font-semibold uppercase text-[rgb(193,198,215)]/70">Lines</div>
         </div>
-        <div className="p-6 bg-muted/20 rounded-sm border flex flex-col items-center">
+        <div className="surface-low flex flex-col items-center rounded-sm border border-white/10 p-6">
           <div className="text-3xl font-bold mb-1">{stats.bytes}</div>
-          <div className="text-xs text-muted-foreground uppercase font-semibold">Bytes</div>
+          <div className="text-xs font-semibold uppercase text-[rgb(193,198,215)]/70">Bytes</div>
         </div>
       </div>
     </div>

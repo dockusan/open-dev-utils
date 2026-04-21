@@ -35,9 +35,7 @@ export function CronParser({ toolId }: { toolId: string }) {
   }, [input, parse]);
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col gap-8 max-w-2xl mx-auto">
-      <h2 className="text-2xl font-bold">Cron Parser</h2>
-      
+    <div id={toolId} className="mx-auto flex h-full max-w-2xl flex-col gap-8">
       <div className="space-y-4">
         <Label>Cron Expression</Label>
         <Input 
@@ -46,19 +44,19 @@ export function CronParser({ toolId }: { toolId: string }) {
           className="font-mono text-lg h-12"
           placeholder="e.g. */5 * * * *"
         />
-        <div className="p-4 bg-primary/5 border rounded-sm text-primary font-semibold">
+        <div className="rounded-sm border border-white/10 bg-[#272841] p-4 font-semibold text-[#8cd2da]">
           {description}
         </div>
       </div>
 
-      <div className="space-y-4 pt-6 border-t flex-1 min-h-0 min-w-0">
+      <div className="surface-low flex min-h-0 min-w-0 flex-1 flex-col space-y-4 rounded-sm border border-white/10 p-4">
         <Label>Next 10 Occurrences</Label>
-        <ScrollArea className="flex-1 border rounded-sm p-4 bg-muted/20">
+        <ScrollArea className="surface-lowest flex-1 rounded-sm border border-white/10 p-4">
           <div className="space-y-2 font-mono text-sm">
             {nextRuns.map((r, i) => (
               <div key={i} className="flex gap-4">
-                <span className="text-muted-foreground w-6">{i + 1}.</span>
-                <span>{r}</span>
+                <span className="w-6 text-[rgb(193,198,215)]/55">{i + 1}.</span>
+                <span className="text-[rgb(193,198,215)]">{r}</span>
               </div>
             ))}
           </div>
