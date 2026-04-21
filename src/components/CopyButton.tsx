@@ -39,22 +39,22 @@ export function CopyButton({
         <Button
           variant={variant}
           size={size}
-          className={cn("relative transition-all duration-300 rounded-sm", className)}
+          className={cn("relative rounded-sm", className)}
           onClick={copyToClipboard}
           disabled={disabled}
           {...props}
         >
           <div
             className={cn(
-              "absolute inset-0 flex items-center justify-center transition-all duration-300",
+              "absolute inset-0 flex items-center justify-center transition-all duration-150",
               hasCopied ? "scale-100 opacity-100" : "scale-50 opacity-0"
             )}
           >
-            <Check className="h-4 w-4 text-emerald-500" />
+            <Check className="h-4 w-4 text-emerald-300" />
           </div>
           <div
             className={cn(
-              "absolute inset-0 flex items-center justify-center transition-all duration-300",
+              "absolute inset-0 flex items-center justify-center transition-all duration-150",
               hasCopied ? "scale-50 opacity-0" : "scale-100 opacity-100"
             )}
           >
@@ -69,4 +69,3 @@ export function CopyButton({
     </Tooltip>
   );
 }
-

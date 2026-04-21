@@ -46,9 +46,8 @@ export function LoremIpsum({ toolId }: { toolId: string }) {
   }, [generate]);
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col gap-6 max-w-4xl mx-auto">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Lorem Ipsum Generator</h2>
+    <div id={toolId} className="mx-auto flex h-full max-w-4xl flex-col gap-6">
+      <div className="flex items-center justify-end">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <Label htmlFor="paras" className="whitespace-nowrap">Paragraphs:</Label>
@@ -73,7 +72,7 @@ export function LoremIpsum({ toolId }: { toolId: string }) {
       <Textarea 
         readOnly 
         value={output} 
-        className="flex-1 font-sans text-lg leading-relaxed p-6 bg-muted/20 resize-none border-border/50"
+        className="flex-1 resize-none border-white/10 bg-black/10 p-6 font-sans text-lg leading-relaxed"
       />
     </div>
   );

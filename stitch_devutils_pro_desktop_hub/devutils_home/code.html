@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DevUtils - Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#272841",
+                        "primary-fixed-dim": "#aec6ff",
+                        "surface-bright": "#373751",
+                        "on-tertiary-fixed": "#0d1c2e",
+                        "secondary-fixed-dim": "#8cd2da",
+                        "secondary": "#8cd2da",
+                        "on-secondary-container": "#8bd2d9",
+                        "on-surface-variant": "#c1c6d7",
+                        "primary": "#aec6ff",
+                        "inverse-on-surface": "#2e2e47",
+                        "error": "#ffb4ab",
+                        "tertiary": "#b9c7df",
+                        "on-primary": "#002e6b",
+                        "surface-container": "#1d1d36",
+                        "tertiary-fixed-dim": "#b9c7df",
+                        "background": "#111129",
+                        "on-primary-fixed-variant": "#004397",
+                        "on-primary-fixed": "#001a43",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#32324c",
+                        "surface": "#111129",
+                        "surface-container-highest": "#32324c",
+                        "primary-container": "#0070f3",
+                        "inverse-primary": "#0059c5",
+                        "on-secondary-fixed": "#002022",
+                        "on-tertiary-fixed-variant": "#3a485b",
+                        "on-secondary": "#00363b",
+                        "surface-tint": "#aec6ff",
+                        "secondary-fixed": "#a7eef6",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0b0b23",
+                        "on-surface": "#e2dfff",
+                        "tertiary-container": "#69778c",
+                        "on-background": "#e2dfff",
+                        "secondary-container": "#005c63",
+                        "surface-container-low": "#191931",
+                        "on-secondary-fixed-variant": "#004f55",
+                        "outline": "#8b90a0",
+                        "outline-variant": "#414754",
+                        "on-primary-container": "#ffffff",
+                        "inverse-surface": "#e2dfff",
+                        "on-tertiary": "#233144",
+                        "tertiary-fixed": "#d5e3fc",
+                        "on-tertiary-container": "#ffffff",
+                        "on-error": "#690005",
+                        "surface-dim": "#111129",
+                        "primary-fixed": "#d8e2ff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel {
+            background: rgba(55, 55, 81, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .ghost-border {
+            border: 1px solid rgba(65, 71, 84, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background h-screen flex flex-col overflow-hidden">
+<!-- TopNavBar -->
+<nav class="bg-[#111129] dark:bg-[#111129] text-[#0070F3] font-['Inter'] font-medium text-xs tracking-tight uppercase docked full-width top-0 bg-[#191931] tonal-shift-bottom flat no-shadows flex justify-between items-center h-12 px-4 w-full border-b border-surface-container-lowest relative z-20">
+<div class="flex items-center gap-6">
+<div class="text-sm font-bold tracking-tighter text-slate-100 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">terminal</span>
+                DevUtils
+            </div>
+<div class="hidden md:flex gap-4">
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded-sm" href="#">Format</a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded-sm" href="#">Convert</a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded-sm" href="#">Inspect</a>
+<a class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded-sm" href="#">Generate</a>
+</div>
+</div>
+<div class="flex-1 max-w-md mx-8 hidden lg:block">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container-lowest text-on-surface text-sm border outline-none border-outline-variant/15 focus:border-primary-container/50 rounded-sm py-1.5 pl-9 pr-3 transition-colors" placeholder="Search tools, commands... (⌘K)" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3 text-slate-400">
+<button class="hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1.5 rounded-sm"><span class="material-symbols-outlined text-sm">settings</span></button>
+<button class="hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1.5 rounded-sm"><span class="material-symbols-outlined text-sm">terminal</span></button>
+<button class="hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1.5 rounded-sm"><span class="material-symbols-outlined text-sm">keyboard_command_key</span></button>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden relative">
+<!-- SideNavBar -->
+<aside class="hidden md:flex bg-[#191931] dark:bg-[#191931] text-[#0070F3] font-['Inter'] text-sm font-medium docked left-0 h-full w-64 tonal-transition-right bg-[#0b0b23] flat flex-col h-full p-2 space-y-1 z-10 ghost-border border-r">
+<div class="mb-6 mt-2 px-3">
+<div class="text-xs text-on-surface-variant tracking-widest uppercase mb-1">Workspace</div>
+<div class="text-lg font-black text-slate-50 flex items-center justify-between">
+                    DevTeam Alpha
+                    <span class="text-[10px] bg-surface-container-highest px-1.5 py-0.5 rounded-sm text-tertiary">Pro Plan</span>
+</div>
+</div>
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-semibold py-2 rounded-sm mb-4 hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> New Tool
+            </button>
+<div class="flex-1 overflow-y-auto space-y-1 pr-1">
+<div class="text-[10px] text-on-surface-variant tracking-widest uppercase px-3 py-2 mt-2">Tools</div>
+<a class="flex items-center gap-3 px-3 py-2 bg-[#373751] text-white rounded-sm ease-out duration-150" href="#">
+<span class="material-symbols-outlined text-sm">grid_view</span>
+                    All Tools
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm ease-out duration-150" href="#">
+<span class="material-symbols-outlined text-sm">star</span>
+                    Favorites
+                </a>
+<div class="text-[10px] text-on-surface-variant tracking-widest uppercase px-3 py-2 mt-4">Pinned</div>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm ease-out duration-150" href="#">
+<span class="material-symbols-outlined text-sm">code</span>
+                    JSON Formatter
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm ease-out duration-150" href="#">
+<span class="material-symbols-outlined text-sm">swap_horiz</span>
+                    Base64
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm ease-out duration-150" href="#">
+<span class="material-symbols-outlined text-sm">search_check</span>
+                    RegEx Tester
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm ease-out duration-150" href="#">
+<span class="material-symbols-outlined text-sm">difference</span>
+                    Diff Viewer
+                </a>
+</div>
+<div class="mt-auto pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm ease-out duration-150" href="#">
+<span class="material-symbols-outlined text-sm">menu_book</span>
+                    Docs
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm ease-out duration-150" href="#">
+<span class="material-symbols-outlined text-sm">chat_bubble</span>
+                    Feedback
+                </a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto bg-surface p-6 relative">
+<!-- Smart Suggestion Banner -->
+<div class="mb-8 p-4 rounded-sm bg-surface-container-high ghost-border flex items-center justify-between border-l-2 border-l-primary-container">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">content_paste_search</span>
+<div>
+<h3 class="text-sm font-semibold text-on-surface">JSON detected in clipboard</h3>
+<p class="text-xs text-on-surface-variant font-mono mt-1">{"status": "success", "data": ...}</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 bg-surface-container-highest text-on-surface text-xs font-medium rounded-sm hover:bg-surface-bright transition-colors ghost-border">Dismiss</button>
+<button class="px-4 py-1.5 bg-primary-container text-on-primary-container text-xs font-medium rounded-sm hover:opacity-90 transition-opacity">Open Formatter</button>
+</div>
+</div>
+<div class="flex items-center justify-between mb-6">
+<h1 class="text-2xl font-bold tracking-tight text-on-surface">Workspace</h1>
+<div class="flex gap-2 bg-surface-container-lowest p-1 rounded-sm ghost-border">
+<button class="px-3 py-1 bg-surface-container-highest text-on-surface text-xs font-medium rounded-sm shadow-sm">Grid</button>
+<button class="px-3 py-1 text-on-surface-variant hover:text-on-surface text-xs font-medium rounded-sm transition-colors">List</button>
+</div>
+</div>
+<!-- Bento Grid - Favorites -->
+<div class="mb-10">
+<h2 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">star</span> Favorites
+                </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Tool Card -->
+<div class="bg-surface-container-low rounded-sm p-4 hover:bg-surface-container-high transition-colors cursor-pointer group relative overflow-hidden ghost-border">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-3">
+<div class="p-2 bg-surface-container-highest rounded-sm group-hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-secondary">code</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</button>
+</div>
+<h3 class="text-sm font-semibold text-on-surface mb-1">JSON Formatter</h3>
+<p class="text-xs text-on-surface-variant line-clamp-2">Format, validate, and minify JSON data.</p>
+</div>
+<!-- Tool Card -->
+<div class="bg-surface-container-low rounded-sm p-4 hover:bg-surface-container-high transition-colors cursor-pointer group relative overflow-hidden ghost-border">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-3">
+<div class="p-2 bg-surface-container-highest rounded-sm group-hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-tertiary">swap_horiz</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</button>
+</div>
+<h3 class="text-sm font-semibold text-on-surface mb-1">Base64 Encoder</h3>
+<p class="text-xs text-on-surface-variant line-clamp-2">Encode and decode strings to Base64 format.</p>
+</div>
+</div>
+</div>
+<!-- Bento Grid - Categories -->
+<div>
+<h2 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">category</span> Categories
+                </h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Category Section -->
+<div class="bg-surface-container-lowest p-5 rounded-sm ghost-border flex flex-col h-full">
+<div class="flex items-center gap-3 mb-4 border-b border-outline-variant/15 pb-3">
+<span class="material-symbols-outlined text-primary-container">format_align_left</span>
+<h3 class="text-sm font-bold text-on-surface uppercase tracking-wide">Formatters</h3>
+</div>
+<div class="space-y-2 flex-1">
+<a class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-sm transition-colors group" href="#">
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface font-medium">JSON</span>
+<span class="text-xs text-outline-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">Open →</span>
+</a>
+<a class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-sm transition-colors group" href="#">
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface font-medium">XML</span>
+<span class="text-xs text-outline-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">Open →</span>
+</a>
+<a class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-sm transition-colors group" href="#">
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface font-medium">SQL</span>
+<span class="text-xs text-outline-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">Open →</span>
+</a>
+</div>
+</div>
+<!-- Category Section -->
+<div class="bg-surface-container-lowest p-5 rounded-sm ghost-border flex flex-col h-full">
+<div class="flex items-center gap-3 mb-4 border-b border-outline-variant/15 pb-3">
+<span class="material-symbols-outlined text-secondary">transform</span>
+<h3 class="text-sm font-bold text-on-surface uppercase tracking-wide">Converters</h3>
+</div>
+<div class="space-y-2 flex-1">
+<a class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-sm transition-colors group" href="#">
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface font-medium">JSON ↔ YAML</span>
+<span class="text-xs text-outline-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">Open →</span>
+</a>
+<a class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-sm transition-colors group" href="#">
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface font-medium">Base64</span>
+<span class="text-xs text-outline-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">Open →</span>
+</a>
+<a class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-sm transition-colors group" href="#">
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface font-medium">Hex ↔ RGB</span>
+<span class="text-xs text-outline-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">Open →</span>
+</a>
+</div>
+</div>
+<!-- Category Section -->
+<div class="bg-surface-container-lowest p-5 rounded-sm ghost-border flex flex-col h-full">
+<div class="flex items-center gap-3 mb-4 border-b border-outline-variant/15 pb-3">
+<span class="material-symbols-outlined text-tertiary">troubleshoot</span>
+<h3 class="text-sm font-bold text-on-surface uppercase tracking-wide">Inspectors</h3>
+</div>
+<div class="space-y-2 flex-1">
+<a class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-sm transition-colors group" href="#">
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface font-medium">RegEx Tester</span>
+<span class="text-xs text-outline-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">Open →</span>
+</a>
+<a class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-sm transition-colors group" href="#">
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface font-medium">JWT Decoder</span>
+<span class="text-xs text-outline-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">Open →</span>
+</a>
+<a class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded-sm transition-colors group" href="#">
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface font-medium">Diff Viewer</span>
+<span class="text-xs text-outline-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">Open →</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-[#0b0b23] dark:bg-[#0b0b23] text-[#0070F3] font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest docked full-width bottom-0 h-6 border-t border-[#373751]/15 flat flex justify-between items-center px-3 w-full z-20">
+<div class="text-slate-500">DevUtils v2.4.0 • <span class="text-secondary">Connected</span></div>
+<div class="flex gap-4">
+<a class="text-slate-500 hover:text-slate-300 transition-colors" href="#">System Status</a>
+<a class="text-slate-500 hover:text-slate-300 transition-colors" href="#">API Reference</a>
+</div>
+</footer>
+</body></html>

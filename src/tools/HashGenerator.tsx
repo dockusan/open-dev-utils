@@ -40,9 +40,7 @@ export function HashGenerator({ toolId }: { toolId: string }) {
   }, [input, computeHashes]);
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col gap-6 max-w-5xl mx-auto">
-      <h2 className="text-2xl font-bold">Hash Generator (SubtleCrypto)</h2>
-      
+    <div id={toolId} className="mx-auto flex h-full max-w-5xl flex-col gap-6">
       <div className="space-y-4">
         <div className="space-y-2">
           <Label>Input Text</Label>
@@ -54,11 +52,11 @@ export function HashGenerator({ toolId }: { toolId: string }) {
           />
         </div>
 
-        <div className="space-y-4 pt-4 border-t">
+        <div className="space-y-4 rounded-sm border border-white/10 bg-black/10 p-4">
           <div className="space-y-2">
             <Label>SHA-256</Label>
             <div className="flex gap-2">
-              <Input readOnly value={hashes.sha256} className="font-mono bg-muted/30" />
+              <Input readOnly value={hashes.sha256} className="bg-black/10 font-mono" />
               <CopyButton value={hashes.sha256} />
             </div>
           </div>
@@ -66,7 +64,7 @@ export function HashGenerator({ toolId }: { toolId: string }) {
           <div className="space-y-2">
             <Label>SHA-512</Label>
             <div className="flex gap-2">
-              <Input readOnly value={hashes.sha512} className="font-mono bg-muted/30" />
+              <Input readOnly value={hashes.sha512} className="bg-black/10 font-mono" />
               <CopyButton value={hashes.sha512} />
             </div>
           </div>
@@ -74,7 +72,7 @@ export function HashGenerator({ toolId }: { toolId: string }) {
           <div className="space-y-2">
             <Label>SHA-1</Label>
             <div className="flex gap-2">
-              <Input readOnly value={hashes.sha1} className="font-mono bg-muted/30" />
+              <Input readOnly value={hashes.sha1} className="bg-black/10 font-mono" />
               <CopyButton value={hashes.sha1} />
             </div>
           </div>

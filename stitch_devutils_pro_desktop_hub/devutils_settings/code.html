@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DevUtils - Settings</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#272841",
+                    "primary-fixed-dim": "#aec6ff",
+                    "surface-bright": "#373751",
+                    "on-tertiary-fixed": "#0d1c2e",
+                    "secondary-fixed-dim": "#8cd2da",
+                    "secondary": "#8cd2da",
+                    "on-secondary-container": "#8bd2d9",
+                    "on-surface-variant": "#c1c6d7",
+                    "primary": "#aec6ff",
+                    "inverse-on-surface": "#2e2e47",
+                    "error": "#ffb4ab",
+                    "tertiary": "#b9c7df",
+                    "on-primary": "#002e6b",
+                    "surface-container": "#1d1d36",
+                    "tertiary-fixed-dim": "#b9c7df",
+                    "background": "#111129",
+                    "on-primary-fixed-variant": "#004397",
+                    "on-primary-fixed": "#001a43",
+                    "on-error-container": "#ffdad6",
+                    "surface-variant": "#32324c",
+                    "surface": "#111129",
+                    "surface-container-highest": "#32324c",
+                    "primary-container": "#0070f3",
+                    "inverse-primary": "#0059c5",
+                    "on-secondary-fixed": "#002022",
+                    "on-tertiary-fixed-variant": "#3a485b",
+                    "on-secondary": "#00363b",
+                    "surface-tint": "#aec6ff",
+                    "secondary-fixed": "#a7eef6",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#0b0b23",
+                    "on-surface": "#e2dfff",
+                    "tertiary-container": "#69778c",
+                    "on-background": "#e2dfff",
+                    "secondary-container": "#005c63",
+                    "surface-container-low": "#191931",
+                    "on-secondary-fixed-variant": "#004f55",
+                    "outline": "#8b90a0",
+                    "outline-variant": "#414754",
+                    "on-primary-container": "#ffffff",
+                    "inverse-surface": "#e2dfff",
+                    "on-tertiary": "#233144",
+                    "tertiary-fixed": "#d5e3fc",
+                    "on-tertiary-container": "#ffffff",
+                    "on-error": "#690005",
+                    "surface-dim": "#111129",
+                    "primary-fixed": "#d8e2ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"],
+                    "mono": ["JetBrains Mono", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom Utilities to support design system constraints */
+        .ghost-border { border: 1px solid rgba(65, 71, 84, 0.15); }
+        .glass-panel { background: rgba(55, 55, 81, 0.8); backdrop-filter: blur(20px); }
+        .gradient-glow { background: linear-gradient(135deg, #aec6ff, #0070f3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Hardware Switch Toggle */
+        .toggle-checkbox:checked { right: 0; border-color: #0070f3; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #0070f3; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body h-screen flex flex-col overflow-hidden antialiased selection:bg-primary-container/30 selection:text-primary">
+<!-- TopNavBar -->
+<nav class="bg-[#111129] dark:bg-[#111129] flex justify-between items-center h-12 px-4 w-full sticky top-0 z-50">
+<div class="flex items-center space-x-6">
+<span class="text-sm font-bold tracking-tighter text-slate-100">DevUtils</span>
+<div class="hidden md:flex space-x-4">
+<!-- Inactive Nav Links -->
+<a class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded scale-95 active:opacity-80 transition-all" href="#">Format</a>
+<a class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded scale-95 active:opacity-80 transition-all" href="#">Convert</a>
+<a class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded scale-95 active:opacity-80 transition-all" href="#">Inspect</a>
+<a class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded scale-95 active:opacity-80 transition-all" href="#">Generate</a>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<!-- Trailing Icons -->
+<button class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-[#0070F3] border-b-2 border-[#0070F3] pb-1 hover:bg-[#32324c] transition-colors duration-150 p-1 flex items-center justify-center scale-95 active:opacity-80 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+</button>
+<button class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1 rounded flex items-center justify-center scale-95 active:opacity-80 transition-all">
+<span class="material-symbols-outlined">terminal</span>
+</button>
+<button class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1 rounded flex items-center justify-center scale-95 active:opacity-80 transition-all">
+<span class="material-symbols-outlined">keyboard_command_key</span>
+</button>
+</div>
+</nav>
+<!-- Main Workspace Area -->
+<div class="flex flex-1 overflow-hidden relative bg-[#0b0b23]">
+<!-- SideNavBar -->
+<aside class="bg-[#191931] dark:bg-[#191931] hidden md:flex flex-col h-full w-64 p-2 space-y-1 relative z-10 shadow-[4px_0_24px_rgba(0,0,0,0.2)]">
+<!-- Header -->
+<div class="flex items-center space-x-3 p-3 mb-2">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center overflow-hidden ghost-border">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+</div>
+<div>
+<div class="text-sm font-medium text-slate-50 leading-tight">Workspace</div>
+<div class="text-xs text-slate-400 uppercase tracking-wider font-['Inter']">Pro Plan</div>
+</div>
+</div>
+<!-- Tabs -->
+<nav class="flex-1 space-y-1">
+<a class="flex items-center space-x-3 px-3 py-2 font-['Inter'] text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span>All Tools</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 font-['Inter'] text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span>Favorites</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 font-['Inter'] text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">code</span>
+<span>JSON Formatter</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 font-['Inter'] text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">swap_horiz</span>
+<span>Base64</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 font-['Inter'] text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">search_check</span>
+<span>RegEx Tester</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 font-['Inter'] text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">difference</span>
+<span>Diff Viewer</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="px-2 py-2 mt-auto">
+<button class="w-full flex items-center justify-center space-x-2 bg-[#373751] hover:bg-[#272841] text-white font-['Inter'] text-sm font-medium py-2 rounded ghost-border ease-out duration-150">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>New Tool</span>
+</button>
+</div>
+<!-- Footer Tabs -->
+<div class="pt-2 mt-2 space-y-1 relative before:absolute before:top-0 before:left-2 before:right-2 before:h-px before:bg-outline-variant/15">
+<a class="flex items-center space-x-3 px-3 py-2 font-['Inter'] text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+<span>Docs</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 font-['Inter'] text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+<span>Feedback</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto bg-background p-6 md:p-10 lg:px-16 flex flex-col items-center relative z-0">
+<div class="w-full max-w-4xl space-y-8 pb-20">
+<!-- Page Header -->
+<header class="space-y-2 mb-10">
+<h1 class="text-3xl font-bold tracking-tight text-on-surface">Preferences</h1>
+<p class="text-sm text-on-surface-variant max-w-xl">Configure your workspace environment, global shortcuts, and integration settings to optimize your workflow.</p>
+</header>
+<!-- Settings Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Appearance Section -->
+<section class="bg-surface-container-low rounded p-5 ghost-border flex flex-col space-y-5 hover:bg-surface-container-high transition-colors duration-200">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary text-[20px]">palette</span>
+<h2 class="text-xs font-semibold uppercase tracking-[0.05em] text-on-surface">Appearance</h2>
+</div>
+<div class="space-y-3">
+<label class="text-sm text-on-surface-variant block">Theme Preference</label>
+<!-- Segmented Control Mock -->
+<div class="flex bg-surface-container-highest p-1 rounded ghost-border w-full">
+<button class="flex-1 flex items-center justify-center space-x-2 py-1.5 px-3 rounded-sm bg-transparent hover:bg-surface-bright text-on-surface-variant text-sm transition-colors duration-150">
+<span class="material-symbols-outlined text-[16px]">light_mode</span>
+<span>Light</span>
+</button>
+<button class="flex-1 flex items-center justify-center space-x-2 py-1.5 px-3 rounded-sm bg-surface text-on-surface ghost-border shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-sm transition-colors duration-150">
+<span class="material-symbols-outlined text-[16px]">dark_mode</span>
+<span>Dark</span>
+</button>
+<button class="flex-1 flex items-center justify-center space-x-2 py-1.5 px-3 rounded-sm bg-transparent hover:bg-surface-bright text-on-surface-variant text-sm transition-colors duration-150">
+<span class="material-symbols-outlined text-[16px]">desktop_windows</span>
+<span>System</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Behavior Section -->
+<section class="bg-surface-container-low rounded p-5 ghost-border flex flex-col space-y-5 hover:bg-surface-container-high transition-colors duration-200">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary text-[20px]">bolt</span>
+<h2 class="text-xs font-semibold uppercase tracking-[0.05em] text-on-surface">Behavior</h2>
+</div>
+<div class="space-y-4">
+<!-- Toggle Row -->
+<div class="flex items-center justify-between group">
+<div class="space-y-0.5">
+<label class="text-sm font-medium text-on-surface block">Launch at login</label>
+<span class="text-xs text-on-surface-variant block">Start DevUtils silently in the background</span>
+</div>
+<div class="relative inline-block w-10 h-5 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-surface-container-highest border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="toggle-launch" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-bright cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-launch"></label>
+</div>
+</div>
+<!-- Input Row -->
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant/10">
+<div class="space-y-0.5">
+<label class="text-sm font-medium text-on-surface block">Global shortcut</label>
+<span class="text-xs text-on-surface-variant block">Summon command palette</span>
+</div>
+<div class="flex items-center space-x-2 bg-surface-container-highest ghost-border rounded px-2 py-1.5 cursor-text hover:bg-surface-bright transition-colors duration-150">
+<span class="font-mono text-sm text-primary tracking-widest">⌘K</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Integrations Section -->
+<section class="bg-surface-container-low rounded p-5 ghost-border flex flex-col space-y-5 hover:bg-surface-container-high transition-colors duration-200 lg:col-span-2">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary text-[20px]">integration_instructions</span>
+<h2 class="text-xs font-semibold uppercase tracking-[0.05em] text-on-surface">Integrations</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Terminal Card -->
+<div class="bg-surface-container-highest p-4 rounded ghost-border flex flex-col justify-between space-y-4">
+<div class="flex items-start space-x-3">
+<div class="p-2 bg-surface rounded ghost-border">
+<span class="material-symbols-outlined text-on-surface text-[20px]">terminal</span>
+</div>
+<div>
+<h3 class="text-sm font-medium text-on-surface">Terminal</h3>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Execute scripts directly from the utility panel.</p>
+</div>
+</div>
+<button class="w-full text-xs font-medium text-on-surface py-2 bg-surface hover:bg-surface-bright rounded ghost-border transition-colors duration-150">Connected</button>
+</div>
+<!-- Raycast Card -->
+<div class="bg-surface-container-highest p-4 rounded ghost-border flex flex-col justify-between space-y-4">
+<div class="flex items-start space-x-3">
+<div class="p-2 bg-surface rounded ghost-border">
+<span class="material-symbols-outlined text-on-surface text-[20px]">search</span>
+</div>
+<div>
+<h3 class="text-sm font-medium text-on-surface">Raycast</h3>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Access tools via global launcher extensions.</p>
+</div>
+</div>
+<button class="w-full text-xs font-medium text-primary-container bg-primary-container/10 hover:bg-primary-container/20 py-2 rounded ghost-border transition-colors duration-150">Connect</button>
+</div>
+<!-- Alfred Card -->
+<div class="bg-surface-container-highest p-4 rounded ghost-border flex flex-col justify-between space-y-4">
+<div class="flex items-start space-x-3">
+<div class="p-2 bg-surface rounded ghost-border">
+<span class="material-symbols-outlined text-on-surface text-[20px]">search</span>
+</div>
+<div>
+<h3 class="text-sm font-medium text-on-surface">Alfred</h3>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Custom workflows and snippet injection.</p>
+</div>
+</div>
+<button class="w-full text-xs font-medium text-primary-container bg-primary-container/10 hover:bg-primary-container/20 py-2 rounded ghost-border transition-colors duration-150">Connect</button>
+</div>
+</div>
+</section>
+<!-- Data & Privacy Section -->
+<section class="bg-surface-container-low rounded p-5 ghost-border flex flex-col space-y-5 hover:bg-surface-container-high transition-colors duration-200 lg:col-span-2">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary text-[20px]">security</span>
+<h2 class="text-xs font-semibold uppercase tracking-[0.05em] text-on-surface">Data &amp; Privacy</h2>
+</div>
+<div class="space-y-4 flex flex-col md:flex-row md:space-y-0 md:space-x-6">
+<div class="flex-1 space-y-4">
+<div class="flex items-center justify-between p-3 bg-surface-container-highest rounded ghost-border group">
+<div class="space-y-0.5">
+<label class="text-sm font-medium text-on-surface block">Crash Reports</label>
+<span class="text-xs text-on-surface-variant block">Send anonymous telemetry</span>
+</div>
+<div class="relative inline-block w-10 h-5 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-surface-container-highest border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="toggle-telemetry" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-bright cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-telemetry"></label>
+</div>
+</div>
+</div>
+<div class="flex-1 space-y-4">
+<div class="flex items-center justify-between p-3 bg-surface-container-highest rounded ghost-border group">
+<div class="space-y-0.5">
+<label class="text-sm font-medium text-on-surface block">Local History</label>
+<span class="text-xs text-on-surface-variant block">142 MB cached tool states</span>
+</div>
+<button class="flex items-center space-x-1 px-3 py-1.5 text-xs font-medium text-error border border-error/20 hover:bg-error/10 hover:border-error/40 rounded transition-colors duration-150">
+<span class="material-symbols-outlined text-[14px]">delete</span>
+<span>Clear</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-[#0b0b23] dark:bg-[#0b0b23] flex justify-between items-center px-3 w-full docked full-width bottom-0 h-6 border-t border-[#373751]/15 flat">
+<span class="font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest text-[#0070F3]">DevUtils v2.4.0 • Connected</span>
+<div class="flex space-x-4">
+<a class="font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-300 transition-colors" href="#">System Status</a>
+<a class="font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-300 transition-colors" href="#">API Reference</a>
+</div>
+</footer>
+</body></html>

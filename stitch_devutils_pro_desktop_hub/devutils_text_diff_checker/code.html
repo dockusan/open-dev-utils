@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DevUtils - Text Diff Checker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#272841",
+                        "primary-fixed-dim": "#aec6ff",
+                        "surface-bright": "#373751",
+                        "on-tertiary-fixed": "#0d1c2e",
+                        "secondary-fixed-dim": "#8cd2da",
+                        "secondary": "#8cd2da",
+                        "on-secondary-container": "#8bd2d9",
+                        "on-surface-variant": "#c1c6d7",
+                        "primary": "#aec6ff",
+                        "inverse-on-surface": "#2e2e47",
+                        "error": "#ffb4ab",
+                        "tertiary": "#b9c7df",
+                        "on-primary": "#002e6b",
+                        "surface-container": "#1d1d36",
+                        "tertiary-fixed-dim": "#b9c7df",
+                        "background": "#111129",
+                        "on-primary-fixed-variant": "#004397",
+                        "on-primary-fixed": "#001a43",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#32324c",
+                        "surface": "#111129",
+                        "surface-container-highest": "#32324c",
+                        "primary-container": "#0070f3",
+                        "inverse-primary": "#0059c5",
+                        "on-secondary-fixed": "#002022",
+                        "on-tertiary-fixed-variant": "#3a485b",
+                        "on-secondary": "#00363b",
+                        "surface-tint": "#aec6ff",
+                        "secondary-fixed": "#a7eef6",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0b0b23",
+                        "on-surface": "#e2dfff",
+                        "tertiary-container": "#69778c",
+                        "on-background": "#e2dfff",
+                        "secondary-container": "#005c63",
+                        "surface-container-low": "#191931",
+                        "on-secondary-fixed-variant": "#004f55",
+                        "outline": "#8b90a0",
+                        "outline-variant": "#414754",
+                        "on-primary-container": "#ffffff",
+                        "inverse-surface": "#e2dfff",
+                        "on-tertiary": "#233144",
+                        "tertiary-fixed": "#d5e3fc",
+                        "on-tertiary-container": "#ffffff",
+                        "on-error": "#690005",
+                        "surface-dim": "#111129",
+                        "primary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "code": ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for editors */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0b23; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #32324c; 
+            border-radius: 2px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #414754; 
+        }
+    </style>
+</head>
+<body class="bg-[#111129] text-on-surface font-body h-screen flex overflow-hidden selection:bg-primary-container/30">
+<!-- SideNavBar -->
+<aside class="docked left-0 h-full w-64 tonal-transition-right bg-[#191931] dark:bg-[#191931] flat flex flex-col p-2 space-y-1 z-20 border-r border-outline-variant/15 shrink-0">
+<!-- Header -->
+<div class="px-3 py-4 mb-2 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-bold shadow-[0_4px_12px_rgba(0,112,243,0.3)]">
+                D
+            </div>
+<div>
+<h1 class="text-lg font-black text-slate-50 leading-tight">Workspace</h1>
+<p class="text-xs text-on-surface-variant font-medium">Pro Plan</p>
+</div>
+</div>
+<!-- CTA -->
+<button class="mb-4 mx-2 bg-primary-container text-white rounded-sm py-2 px-4 text-sm font-medium hover:bg-inverse-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Tool
+        </button>
+<!-- Navigation Links -->
+<nav class="flex-1 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm font-['Inter'] text-sm font-medium ease-out duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-slate-200 transition-colors">grid_view</span>
+                All Tools
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm font-['Inter'] text-sm font-medium ease-out duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-slate-200 transition-colors">star</span>
+                Favorites
+            </a>
+<div class="pt-4 pb-1 px-3 text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold">Format &amp; Convert</div>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm font-['Inter'] text-sm font-medium ease-out duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-slate-200 transition-colors">code</span>
+                JSON Formatter
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm font-['Inter'] text-sm font-medium ease-out duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-slate-200 transition-colors">swap_horiz</span>
+                Base64
+            </a>
+<div class="pt-4 pb-1 px-3 text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold">Inspect &amp; Test</div>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm font-['Inter'] text-sm font-medium ease-out duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-slate-200 transition-colors">search_check</span>
+                RegEx Tester
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 bg-[#373751] text-white rounded-sm font-['Inter'] text-sm font-medium ease-out duration-150" href="#">
+<span class="material-symbols-outlined text-[20px] text-primary">difference</span>
+                Diff Viewer
+            </a>
+</nav>
+<!-- Footer Links -->
+<div class="mt-auto pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm font-['Inter'] text-sm font-medium ease-out duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-slate-200 transition-colors">menu_book</span>
+                Docs
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] rounded-sm font-['Inter'] text-sm font-medium ease-out duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-slate-200 transition-colors">chat_bubble</span>
+                Feedback
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-[#111129]">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 bg-[#111129] dark:bg-[#111129] bg-[#191931] tonal-shift-bottom flat no-shadows flex justify-between items-center h-12 px-4 w-full z-10">
+<div class="flex items-center gap-6 h-full">
+<span class="text-sm font-bold tracking-tighter text-slate-100">DevUtils</span>
+<nav class="hidden md:flex h-full items-center gap-4">
+<a class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded scale-95 active:opacity-80 transition-all flex items-center h-full border-b-2 border-transparent" href="#">Format</a>
+<a class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded scale-95 active:opacity-80 transition-all flex items-center h-full border-b-2 border-transparent" href="#">Convert</a>
+<a class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-[#0070F3] border-b-2 border-[#0070F3] pb-1 px-2 flex items-center h-full" href="#">Inspect</a>
+<a class="font-['Inter'] font-medium text-xs tracking-tight uppercase text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded scale-95 active:opacity-80 transition-all flex items-center h-full border-b-2 border-transparent" href="#">Generate</a>
+</nav>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1.5 rounded scale-95 active:opacity-80 transition-all">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<button class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1.5 rounded scale-95 active:opacity-80 transition-all">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</button>
+<button class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1.5 rounded scale-95 active:opacity-80 transition-all">
+<span class="material-symbols-outlined text-[20px]">keyboard_command_key</span>
+</button>
+</div>
+</header>
+<!-- Tool Canvas -->
+<div class="flex-1 flex flex-col p-4 gap-4 overflow-hidden">
+<!-- Toolbar -->
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-lg font-bold text-on-surface tracking-tight">Text Diff Checker</h2>
+<p class="text-xs text-on-surface-variant font-medium mt-1">Compare original and modified text structures.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="border border-outline-variant/15 text-on-surface bg-surface-container-low hover:bg-surface-container-highest transition-colors rounded-sm px-3 py-1.5 text-xs font-medium flex items-center gap-1.5 h-8">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+                        Clear
+                    </button>
+<button class="border border-outline-variant/15 text-on-surface bg-surface-container-low hover:bg-surface-container-highest transition-colors rounded-sm px-3 py-1.5 text-xs font-medium flex items-center gap-1.5 h-8">
+<span class="material-symbols-outlined text-[16px]">swap_horiz</span>
+                        Swap
+                    </button>
+<button class="bg-surface-bright text-on-surface border border-outline-variant/30 hover:bg-surface-container-highest transition-colors rounded-sm px-4 py-1.5 text-xs font-medium flex items-center gap-1.5 h-8 shadow-[0_4px_12px_rgba(0,0,0,0.2)]">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+                        Copy Diff
+                    </button>
+</div>
+</div>
+<!-- Dual Pane Area -->
+<div class="flex-1 flex gap-2 overflow-hidden bg-surface-container-low p-2 rounded-sm border border-outline-variant/15">
+<!-- Left Pane: Original -->
+<div class="flex-1 flex flex-col min-w-0 border border-outline-variant/15 rounded-sm overflow-hidden bg-surface-container-lowest relative">
+<div class="bg-surface-container-high py-1.5 px-3 flex items-center justify-between border-b border-outline-variant/15">
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Original</span>
+<span class="text-[10px] text-outline font-code">app.config.json</span>
+</div>
+<div class="flex-1 overflow-auto flex">
+<!-- Line Numbers -->
+<div class="w-10 flex-shrink-0 bg-surface-container/50 border-r border-outline-variant/15 text-outline text-right pr-2 py-2 font-code text-xs select-none">
+<div class="h-6 leading-6">1</div>
+<div class="h-6 leading-6">2</div>
+<div class="h-6 leading-6 bg-error-container/20 text-error/70">3</div>
+<div class="h-6 leading-6">4</div>
+<div class="h-6 leading-6 bg-error-container/20 text-error/70">5</div>
+<div class="h-6 leading-6 bg-error-container/20 text-error/70">6</div>
+<div class="h-6 leading-6">7</div>
+<div class="h-6 leading-6">8</div>
+</div>
+<!-- Code Content -->
+<div class="flex-1 p-2 font-code text-sm whitespace-pre font-medium text-tertiary-fixed-dim">
+<div class="h-6 leading-6">{</div>
+<div class="h-6 leading-6">  "name": "DevUtils",</div>
+<div class="h-6 leading-6 bg-error-container/20 text-on-surface w-full block"> <span class="text-error">"version"</span>: <span class="text-tertiary">"1.0.0"</span>,</div>
+<div class="h-6 leading-6">  "dependencies": {</div>
+<div class="h-6 leading-6 bg-error-container/20 text-on-surface w-full block"> <span class="text-error">"lodash"</span>: <span class="text-tertiary">"^4.17.21"</span>,</div>
+<div class="h-6 leading-6 bg-error-container/20 text-on-surface w-full block"> <span class="text-error">"axios"</span>: <span class="text-tertiary">"^0.21.1"</span></div>
+<div class="h-6 leading-6">  }</div>
+<div class="h-6 leading-6">}</div>
+</div>
+</div>
+</div>
+<!-- Central Gutter (Visual Connection) -->
+<div class="w-6 flex-shrink-0 flex flex-col items-center py-8 gap-1 opacity-50">
+<span class="material-symbols-outlined text-[16px] text-outline-variant mt-[42px]">link</span>
+<div class="h-[72px] w-[2px] bg-outline-variant/30 rounded-full my-1"></div>
+<span class="material-symbols-outlined text-[16px] text-outline-variant mt-[6px]">link</span>
+</div>
+<!-- Right Pane: Modified -->
+<div class="flex-1 flex flex-col min-w-0 border border-outline-variant/15 rounded-sm overflow-hidden bg-surface-container-lowest relative">
+<div class="bg-surface-container-high py-1.5 px-3 flex items-center justify-between border-b border-outline-variant/15">
+<span class="font-['Inter'] text-[10px] font-bold uppercase tracking-[0.05em] text-on-surface-variant flex items-center gap-2">
+                            Modified
+                            <span class="px-1.5 py-0.5 rounded-sm bg-secondary-container/30 text-secondary text-[9px]">+3 Additions</span>
+</span>
+<span class="text-[10px] text-outline font-code">app.config.json</span>
+</div>
+<div class="flex-1 overflow-auto flex">
+<!-- Line Numbers -->
+<div class="w-10 flex-shrink-0 bg-surface-container/50 border-r border-outline-variant/15 text-outline text-right pr-2 py-2 font-code text-xs select-none">
+<div class="h-6 leading-6">1</div>
+<div class="h-6 leading-6">2</div>
+<div class="h-6 leading-6 bg-secondary-container/20 text-secondary/70">3</div>
+<div class="h-6 leading-6">4</div>
+<div class="h-6 leading-6 bg-secondary-container/20 text-secondary/70">5</div>
+<div class="h-6 leading-6 bg-secondary-container/20 text-secondary/70">6</div>
+<div class="h-6 leading-6 bg-secondary-container/20 text-secondary/70">7</div>
+<div class="h-6 leading-6">8</div>
+<div class="h-6 leading-6">9</div>
+</div>
+<!-- Code Content -->
+<div class="flex-1 p-2 font-code text-sm whitespace-pre font-medium text-tertiary-fixed-dim">
+<div class="h-6 leading-6">{</div>
+<div class="h-6 leading-6">  "name": "DevUtils",</div>
+<div class="h-6 leading-6 bg-secondary-container/20 text-on-surface w-full block"> <span class="text-secondary">"version"</span>: <span class="text-tertiary">"2.4.0"</span>,</div>
+<div class="h-6 leading-6">  "dependencies": {</div>
+<div class="h-6 leading-6 bg-secondary-container/20 text-on-surface w-full block"> <span class="text-secondary">"lodash"</span>: <span class="text-tertiary">"^4.17.21"</span>,</div>
+<div class="h-6 leading-6 bg-secondary-container/20 text-on-surface w-full block"> <span class="text-secondary">"axios"</span>: <span class="text-tertiary">"^1.6.0"</span>,</div>
+<div class="h-6 leading-6 bg-secondary-container/20 text-on-surface w-full block"> <span class="text-secondary">"tailwindcss"</span>: <span class="text-tertiary">"^3.4.1"</span></div>
+<div class="h-6 leading-6">  }</div>
+<div class="h-6 leading-6">}</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="docked full-width bottom-0 h-6 bg-[#0b0b23] dark:bg-[#0b0b23] border-t border-[#373751]/15 flat flex justify-between items-center px-3 w-full shrink-0">
+<span class="font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest text-[#0070F3]">DevUtils v2.4.0 • Connected</span>
+<div class="flex items-center gap-4">
+<a class="font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-300 transition-colors" href="#">System Status</a>
+<a class="font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest text-slate-500 hover:text-slate-300 transition-colors" href="#">API Reference</a>
+</div>
+</footer>
+</main>
+</body></html>

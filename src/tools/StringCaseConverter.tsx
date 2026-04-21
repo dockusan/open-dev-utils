@@ -33,9 +33,7 @@ export function StringCaseConverter({ toolId }: { toolId: string }) {
   }, [input, convert]);
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col gap-8 max-w-4xl mx-auto overflow-auto">
-      <h2 className="text-2xl font-bold">String Case Converter</h2>
-      
+    <div id={toolId} className="mx-auto flex h-full max-w-4xl flex-col gap-8 overflow-auto">
       <div className="space-y-4">
         <Label>Input Text</Label>
         <Textarea 
@@ -46,12 +44,12 @@ export function StringCaseConverter({ toolId }: { toolId: string }) {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 pt-4 border-t">
+      <div className="grid grid-cols-1 gap-x-12 gap-y-6 rounded-sm border border-white/10 bg-black/10 p-5 md:grid-cols-2">
         {results.map((r, i) => (
           <div key={i} className="space-y-2">
-            <Label className="text-muted-foreground text-xs uppercase tracking-widest">{r.name}</Label>
+            <Label className="text-xs uppercase tracking-widest text-[rgb(193,198,215)]/70">{r.name}</Label>
             <div className="flex gap-2">
-              <Input readOnly value={r.value} className="font-mono bg-muted/20" />
+              <Input readOnly value={r.value} className="bg-black/10 font-mono" />
               <CopyButton value={r.value} />
             </div>
           </div>

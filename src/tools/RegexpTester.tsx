@@ -28,9 +28,7 @@ export function RegexpTester({ toolId }: { toolId: string }) {
   }, [test]);
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col gap-6 max-w-5xl mx-auto overflow-auto">
-      <h2 className="text-2xl font-bold">RegExp Tester</h2>
-      
+    <div id={toolId} className="mx-auto flex h-full max-w-5xl flex-col gap-6 overflow-auto">
       <div className="grid grid-cols-4 gap-4">
         <div className="col-span-3 space-y-2">
           <Label>Regular Expression</Label>
@@ -63,21 +61,21 @@ export function RegexpTester({ toolId }: { toolId: string }) {
         />
       </div>
 
-      <div className="space-y-4 pt-4 border-t">
+      <div className="surface-low rounded-sm border border-white/10 p-4">
         <Label>Matches ({matches.length})</Label>
-        <div className="space-y-2">
+        <div className="mt-3 space-y-2">
           {matches.map((m, i) => (
-            <div key={i} className="p-3 bg-muted/30 rounded-sm border font-mono text-sm">
-              <div className="text-xs text-muted-foreground mb-1 italic">Match {i + 1}</div>
-              <div className="font-bold text-primary">{m[0]}</div>
-              <div className="grid grid-cols-2 gap-2 mt-2 opacity-70">
+            <div key={i} className="surface-lowest rounded-sm border border-white/10 p-3 font-mono text-sm">
+              <div className="mb-1 text-xs italic text-[rgb(193,198,215)]/70">Match {i + 1}</div>
+              <div className="font-bold text-[#8cd2da]">{m[0]}</div>
+              <div className="mt-2 grid grid-cols-2 gap-2 text-[rgb(193,198,215)]/80">
                 {m.slice(1).map((group: string, gi: number) => (
                   <div key={gi}>Group {gi + 1}: {group}</div>
                 ))}
               </div>
             </div>
           ))}
-          {matches.length === 0 && <div className="text-muted-foreground italic">No matches found</div>}
+          {matches.length === 0 && <div className="italic text-[rgb(193,198,215)]/70">No matches found</div>}
         </div>
       </div>
     </div>

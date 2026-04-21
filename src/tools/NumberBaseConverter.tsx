@@ -40,10 +40,8 @@ export function NumberBaseConverter({ toolId }: { toolId: string }) {
   }, [update]);
 
   return (
-    <div id={toolId} className="h-full p-8 flex flex-col gap-6 max-w-2xl mx-auto">
-      <h2 className="text-2xl font-bold">Number Base Converter</h2>
-      
-      <div className="space-y-6">
+    <div id={toolId} className="mx-auto flex h-full max-w-2xl flex-col gap-6">
+      <div className="space-y-6 rounded-sm border border-white/10 bg-black/10 p-5">
         <div className="space-y-2">
           <Label>Decimal (Base 10)</Label>
           <div className="flex gap-2">

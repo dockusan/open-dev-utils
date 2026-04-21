@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JWT Debugger - DevUtils</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#272841",
+                        "primary-fixed-dim": "#aec6ff",
+                        "surface-bright": "#373751",
+                        "on-tertiary-fixed": "#0d1c2e",
+                        "secondary-fixed-dim": "#8cd2da",
+                        "secondary": "#8cd2da",
+                        "on-secondary-container": "#8bd2d9",
+                        "on-surface-variant": "#c1c6d7",
+                        "primary": "#aec6ff",
+                        "inverse-on-surface": "#2e2e47",
+                        "error": "#ffb4ab",
+                        "tertiary": "#b9c7df",
+                        "on-primary": "#002e6b",
+                        "surface-container": "#1d1d36",
+                        "tertiary-fixed-dim": "#b9c7df",
+                        "background": "#111129",
+                        "on-primary-fixed-variant": "#004397",
+                        "on-primary-fixed": "#001a43",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#32324c",
+                        "surface": "#111129",
+                        "surface-container-highest": "#32324c",
+                        "primary-container": "#0070f3",
+                        "inverse-primary": "#0059c5",
+                        "on-secondary-fixed": "#002022",
+                        "on-tertiary-fixed-variant": "#3a485b",
+                        "on-secondary": "#00363b",
+                        "surface-tint": "#aec6ff",
+                        "secondary-fixed": "#a7eef6",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0b0b23",
+                        "on-surface": "#e2dfff",
+                        "tertiary-container": "#69778c",
+                        "on-background": "#e2dfff",
+                        "secondary-container": "#005c63",
+                        "surface-container-low": "#191931",
+                        "on-secondary-fixed-variant": "#004f55",
+                        "outline": "#8b90a0",
+                        "outline-variant": "#414754",
+                        "on-primary-container": "#ffffff",
+                        "inverse-surface": "#e2dfff",
+                        "on-tertiary": "#233144",
+                        "tertiary-fixed": "#d5e3fc",
+                        "on-tertiary-container": "#ffffff",
+                        "on-error": "#690005",
+                        "surface-dim": "#111129",
+                        "primary-fixed": "#d8e2ff",
+                        "jwt-header": "#fbbf24",
+                        "jwt-payload": "#d946ef",
+                        "jwt-signature": "#06b6d4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .jwt-encoded {
+            word-break: break-all;
+            white-space: pre-wrap;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .text-jwt-header { color: #fbbf24; }
+        .text-jwt-payload { color: #d946ef; }
+        .text-jwt-signature { color: #06b6d4; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body h-screen flex flex-col overflow-hidden">
+<!-- TopNavBar -->
+<nav class="bg-[#111129] dark:bg-[#111129] docked full-width top-0 bg-[#191931] tonal-shift-bottom flat no-shadows flex justify-between items-center h-12 px-4 w-full z-50">
+<div class="flex items-center space-x-6">
+<span class="text-sm font-bold tracking-tighter text-slate-100">DevUtils</span>
+<div class="hidden md:flex space-x-4">
+<a class="text-slate-400 hover:text-slate-200 font-['Inter'] font-medium text-xs tracking-tight uppercase hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded scale-95 active:opacity-80 transition-all" href="#">Format</a>
+<a class="text-slate-400 hover:text-slate-200 font-['Inter'] font-medium text-xs tracking-tight uppercase hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded scale-95 active:opacity-80 transition-all" href="#">Convert</a>
+<a class="text-[#0070F3] border-b-2 border-[#0070F3] pb-1 font-['Inter'] font-medium text-xs tracking-tight uppercase px-2 py-1" href="#">Inspect</a>
+<a class="text-slate-400 hover:text-slate-200 font-['Inter'] font-medium text-xs tracking-tight uppercase hover:bg-[#32324c] transition-colors duration-150 px-2 py-1 rounded scale-95 active:opacity-80 transition-all" href="#">Generate</a>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<button class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1 rounded scale-95 active:opacity-80 transition-all" data-icon="settings"><span class="material-symbols-outlined text-[18px]">settings</span></button>
+<button class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1 rounded scale-95 active:opacity-80 transition-all" data-icon="terminal"><span class="material-symbols-outlined text-[18px]">terminal</span></button>
+<button class="text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 p-1 rounded scale-95 active:opacity-80 transition-all" data-icon="command"><span class="material-symbols-outlined text-[18px]">keyboard_command_key</span></button>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="bg-[#191931] dark:bg-[#191931] docked left-0 h-full w-64 tonal-transition-right bg-[#0b0b23] flat flex flex-col h-full p-2 space-y-1 hidden md:flex flex-shrink-0">
+<div class="px-3 py-4 flex items-center space-x-3 mb-2 border-b border-outline-variant/15">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center text-primary font-bold">W</div>
+<div>
+<div class="text-sm font-bold text-slate-50">Workspace</div>
+<div class="text-xs text-on-surface-variant">Pro Plan</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded-sm font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="grid_view">grid_view</span>
+<span>All Tools</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded-sm font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="star">star</span>
+<span>Favorites</span>
+</a>
+<div class="mt-4 mb-2 px-3 text-[10px] font-bold tracking-wider text-on-surface-variant uppercase">Inspectors</div>
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded-sm font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="code">code</span>
+<span>JSON Formatter</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded-sm font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="swap_horiz">swap_horiz</span>
+<span>Base64</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 bg-[#373751] text-white rounded-sm ease-out duration-150 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="token">token</span>
+<span>JWT Debugger</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded-sm font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="search_check">search_check</span>
+<span>RegEx Tester</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded-sm font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="difference">difference</span>
+<span>Diff Viewer</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant/15 space-y-1">
+<button class="w-full flex items-center justify-center space-x-2 bg-primary-container text-white py-2 rounded-sm text-sm font-medium hover:bg-inverse-primary transition-colors mb-4">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>New Tool</span>
+</button>
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded-sm font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="menu_book">menu_book</span>
+<span>Docs</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-[#272841] ease-out duration-150 rounded-sm font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="chat_bubble">chat_bubble</span>
+<span>Feedback</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 bg-background flex flex-col h-full overflow-hidden p-4 space-y-4">
+<!-- Header -->
+<div class="flex justify-between items-center bg-surface-container-low p-4 rounded-sm border border-outline-variant/15">
+<div>
+<h1 class="text-lg font-bold text-on-surface uppercase tracking-tight flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary">token</span>
+<span>JWT Debugger</span>
+</h1>
+<p class="text-xs text-on-surface-variant mt-1">Decode, verify and generate JSON Web Tokens.</p>
+</div>
+<div class="flex space-x-2">
+<button class="flex items-center space-x-1 px-3 py-1.5 bg-surface-container-highest hover:bg-surface-bright text-on-surface rounded-sm text-xs font-medium border border-outline-variant/15 transition-colors">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Copy Token</span>
+</button>
+<button class="flex items-center space-x-1 px-3 py-1.5 bg-surface-container-highest hover:bg-surface-bright text-error rounded-sm text-xs font-medium border border-outline-variant/15 transition-colors">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+<span>Clear</span>
+</button>
+</div>
+</div>
+<!-- Workspace Grid -->
+<div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 overflow-hidden">
+<!-- Left Pane: Encoded -->
+<div class="lg:col-span-5 bg-surface-container-low border border-outline-variant/15 rounded-sm flex flex-col overflow-hidden">
+<div class="px-4 py-2 bg-surface-container-highest border-b border-outline-variant/15 flex justify-between items-center">
+<span class="text-xs font-bold uppercase tracking-wider text-on-surface">Encoded</span>
+<span class="text-[10px] text-on-surface-variant font-mono">Paste a token here</span>
+</div>
+<div class="flex-1 p-4 overflow-y-auto bg-surface-container-lowest font-mono text-sm leading-relaxed outline-none focus-within:ring-1 focus-within:ring-primary focus-within:ring-inset" contenteditable="true" spellcheck="false">
+<span class="text-jwt-header">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span class="text-jwt-payload">eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ</span>.<span class="text-jwt-signature">SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</span>
+</div>
+</div>
+<!-- Right Panes: Decoded -->
+<div class="lg:col-span-7 flex flex-col space-y-4 overflow-hidden">
+<!-- Header & Payload Split -->
+<div class="flex-1 grid grid-rows-2 gap-4 overflow-hidden">
+<!-- Header Pane -->
+<div class="bg-surface-container-low border border-outline-variant/15 rounded-sm flex flex-col overflow-hidden">
+<div class="px-4 py-2 bg-surface-container-highest border-b border-outline-variant/15 flex justify-between items-center">
+<span class="text-xs font-bold uppercase tracking-wider text-jwt-header flex items-center space-x-2">
+<span>Header</span>
+<span class="text-[10px] text-on-surface-variant font-normal">ALGORITHM &amp; TOKEN TYPE</span>
+</span>
+</div>
+<div class="flex-1 p-4 overflow-y-auto bg-surface-container-lowest font-mono text-sm text-secondary">
+{
+  <span class="text-tertiary">"alg"</span>: <span class="text-primary-fixed-dim">"HS256"</span>,
+  <span class="text-tertiary">"typ"</span>: <span class="text-primary-fixed-dim">"JWT"</span>
+}
+                            </div>
+</div>
+<!-- Payload Pane -->
+<div class="bg-surface-container-low border border-outline-variant/15 rounded-sm flex flex-col overflow-hidden">
+<div class="px-4 py-2 bg-surface-container-highest border-b border-outline-variant/15 flex justify-between items-center">
+<span class="text-xs font-bold uppercase tracking-wider text-jwt-payload flex items-center space-x-2">
+<span>Payload</span>
+<span class="text-[10px] text-on-surface-variant font-normal">DATA</span>
+</span>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded bg-surface-container hover:bg-surface-bright transition-colors" title="Copy Payload">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+<div class="flex-1 p-4 overflow-y-auto bg-surface-container-lowest font-mono text-sm text-secondary">
+{
+  <span class="text-tertiary">"sub"</span>: <span class="text-primary-fixed-dim">"1234567890"</span>,
+  <span class="text-tertiary">"name"</span>: <span class="text-primary-fixed-dim">"John Doe"</span>,
+  <span class="text-tertiary">"iat"</span>: <span class="text-[#a7eef6]">1516239022</span>
+}
+                            </div>
+</div>
+</div>
+<!-- Signature Verification -->
+<div class="bg-surface-container-low border border-outline-variant/15 rounded-sm flex flex-col shrink-0">
+<div class="px-4 py-2 bg-surface-container-highest border-b border-outline-variant/15 flex justify-between items-center">
+<span class="text-xs font-bold uppercase tracking-wider text-jwt-signature">Verify Signature</span>
+<span class="flex items-center space-x-1 text-xs text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-sm border border-outline-variant/15">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>Invalid Signature</span>
+</span>
+</div>
+<div class="p-4 bg-surface-container-lowest space-y-3">
+<div class="font-mono text-xs text-on-surface-variant leading-relaxed">
+                                HMACSHA256(<br/>
+                                  base64UrlEncode(header) + "." +<br/>
+                                  base64UrlEncode(payload),<br/>
+                                  <input class="bg-surface-container border border-outline-variant/30 text-primary-fixed-dim px-2 py-0.5 rounded-sm focus:outline-none focus:border-primary w-48 mx-1" type="text" value="your-256-bit-secret"/> <br/>
+                                )
+                            </div>
+<div class="flex justify-end pt-2">
+<button class="px-4 py-1.5 bg-primary-container hover:bg-inverse-primary text-white rounded-sm text-xs font-medium transition-colors">
+                                    Verify Signature
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-[#0b0b23] dark:bg-[#0b0b23] docked full-width bottom-0 h-6 border-t border-[#373751]/15 flat flex justify-between items-center px-3 w-full z-50 shrink-0">
+<div class="text-slate-500 font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest">
+            DevUtils v2.4.0 • Connected
+        </div>
+<div class="flex space-x-4">
+<a class="text-slate-500 hover:text-slate-300 font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest" href="#">System Status</a>
+<a class="text-slate-500 hover:text-slate-300 font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest" href="#">API Reference</a>
+</div>
+</footer>
+</body></html>

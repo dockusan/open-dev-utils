@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RegExp Tester - DevUtils</title>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Scrollbar styling for density */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #32324c;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #414754;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#272841",
+                        "primary-fixed-dim": "#aec6ff",
+                        "surface-bright": "#373751",
+                        "on-tertiary-fixed": "#0d1c2e",
+                        "secondary-fixed-dim": "#8cd2da",
+                        "secondary": "#8cd2da",
+                        "on-secondary-container": "#8bd2d9",
+                        "on-surface-variant": "#c1c6d7",
+                        "primary": "#aec6ff",
+                        "inverse-on-surface": "#2e2e47",
+                        "error": "#ffb4ab",
+                        "tertiary": "#b9c7df",
+                        "on-primary": "#002e6b",
+                        "surface-container": "#1d1d36",
+                        "tertiary-fixed-dim": "#b9c7df",
+                        "background": "#111129",
+                        "on-primary-fixed-variant": "#004397",
+                        "on-primary-fixed": "#001a43",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#32324c",
+                        "surface": "#111129",
+                        "surface-container-highest": "#32324c",
+                        "primary-container": "#0070f3",
+                        "inverse-primary": "#0059c5",
+                        "on-secondary-fixed": "#002022",
+                        "on-tertiary-fixed-variant": "#3a485b",
+                        "on-secondary": "#00363b",
+                        "surface-tint": "#aec6ff",
+                        "secondary-fixed": "#a7eef6",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0b0b23",
+                        "on-surface": "#e2dfff",
+                        "tertiary-container": "#69778c",
+                        "on-background": "#e2dfff",
+                        "secondary-container": "#005c63",
+                        "surface-container-low": "#191931",
+                        "on-secondary-fixed-variant": "#004f55",
+                        "outline": "#8b90a0",
+                        "outline-variant": "#414754",
+                        "on-primary-container": "#ffffff",
+                        "inverse-surface": "#e2dfff",
+                        "on-tertiary": "#233144",
+                        "tertiary-fixed": "#d5e3fc",
+                        "on-tertiary-container": "#ffffff",
+                        "on-error": "#690005",
+                        "surface-dim": "#111129",
+                        "primary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"],
+                        "code": ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body h-screen flex flex-col overflow-hidden selection:bg-primary-container/30">
+<!-- TopNavBar (From JSON) -->
+<nav class="bg-[#111129] dark:bg-[#111129] docked full-width top-0 bg-[#191931] tonal-shift-bottom flat no-shadows flex justify-between items-center h-12 px-4 w-full shrink-0 z-20">
+<div class="flex items-center gap-6">
+<span class="text-sm font-bold tracking-tighter text-slate-100">DevUtils</span>
+<div class="hidden md:flex gap-1">
+<!-- Navigation Links -->
+<button class="px-3 py-1.5 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 scale-95 active:opacity-80 font-['Inter'] font-medium text-xs tracking-tight uppercase">Format</button>
+<button class="px-3 py-1.5 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 scale-95 active:opacity-80 font-['Inter'] font-medium text-xs tracking-tight uppercase">Convert</button>
+<button class="px-3 py-1.5 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 scale-95 active:opacity-80 font-['Inter'] font-medium text-xs tracking-tight uppercase">Inspect</button>
+<button class="px-3 py-1.5 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 scale-95 active:opacity-80 font-['Inter'] font-medium text-xs tracking-tight uppercase">Generate</button>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<!-- Trailing Icons -->
+<button class="p-1.5 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 scale-95 active:opacity-80 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+</button>
+<button class="p-1.5 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 scale-95 active:opacity-80 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</button>
+<button class="p-1.5 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#32324c] transition-colors duration-150 scale-95 active:opacity-80 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">keyboard_command_key</span>
+</button>
+</div>
+</nav>
+<!-- Main Workspace -->
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar (From JSON) -->
+<aside class="hidden md:flex flex-col bg-[#191931] dark:bg-[#191931] docked left-0 h-full w-64 tonal-transition-right bg-[#0b0b23] flat p-2 space-y-1 shrink-0 z-10 border-r border-outline-variant/15">
+<!-- Header -->
+<div class="flex items-center gap-3 p-2 mb-4">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/30">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="minimalist geometric user avatar in primary blue and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-mpSDWsfcIu5InJS9eEiSpxLH_Y5vyCJ7G02rPUxt_tEgBfzGif6p2cX_vPYPXP1Yat6Da7oV2Y9X8Dyb2cUH1LDkwhfTBTzwOsyLOsHaKLdxeACiTw2xg3-vNa1Nk1wcOrwhYDctu6_MFQ0ewSGFY56x6-9MMpO_4-m2xOSTohaY8HeFjLtdPXeGxB_-UnFszjRTuSzD7_9WhNmtXndqGnm0CLXYYzVCc8gakZSy1MTl-LGQvk3iTG63eB9pyPiYEMCqBr-tiSA"/>
+</div>
+<div class="flex flex-col">
+<span class="text-lg font-black text-slate-50 leading-tight">Workspace</span>
+<span class="text-xs text-slate-400 font-['Inter']">Pro Plan</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full mb-4 px-3 py-2 bg-primary-container text-on-primary-container rounded-sm font-['Inter'] text-sm font-medium hover:bg-inverse-primary transition-colors duration-150 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Tool
+            </button>
+<!-- Main Tabs -->
+<div class="flex-1 space-y-1 overflow-y-auto">
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#272841] transition-colors duration-150 ease-out font-['Inter'] text-sm font-medium text-left">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+                    All Tools
+                </button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#272841] transition-colors duration-150 ease-out font-['Inter'] text-sm font-medium text-left">
+<span class="material-symbols-outlined text-[18px]">star</span>
+                    Favorites
+                </button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#272841] transition-colors duration-150 ease-out font-['Inter'] text-sm font-medium text-left">
+<span class="material-symbols-outlined text-[18px]">code</span>
+                    JSON Formatter
+                </button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#272841] transition-colors duration-150 ease-out font-['Inter'] text-sm font-medium text-left">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+                    Base64
+                </button>
+<!-- Active Tab -->
+<button class="w-full flex items-center gap-3 px-3 py-2 bg-[#373751] text-white rounded-sm transition-colors duration-150 ease-out font-['Inter'] text-sm font-medium text-left">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">search_check</span>
+                    RegEx Tester
+                </button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#272841] transition-colors duration-150 ease-out font-['Inter'] text-sm font-medium text-left">
+<span class="material-symbols-outlined text-[18px]">difference</span>
+                    Diff Viewer
+                </button>
+</div>
+<!-- Footer Tabs -->
+<div class="pt-4 mt-2 border-t border-outline-variant/15 space-y-1">
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#272841] transition-colors duration-150 ease-out font-['Inter'] text-sm font-medium text-left">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+                    Docs
+                </button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-sm text-slate-400 hover:text-slate-200 hover:bg-[#272841] transition-colors duration-150 ease-out font-['Inter'] text-sm font-medium text-left">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                    Feedback
+                </button>
+</div>
+</aside>
+<!-- Main Content Area (RegExp Tester UI) -->
+<main class="flex-1 bg-surface-container-lowest p-4 overflow-hidden flex flex-col relative">
+<!-- Tool Header -->
+<header class="flex justify-between items-center mb-4 shrink-0">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center text-primary border border-outline-variant/20">
+<span class="material-symbols-outlined text-[20px]">search_check</span>
+</div>
+<h1 class="text-on-surface font-headline uppercase tracking-[0.05em] text-sm font-bold">RegEx Tester</h1>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 bg-surface-container-high hover:bg-surface-bright text-on-surface text-xs font-medium rounded-sm border border-outline-variant/30 transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">bookmark</span> Save
+                    </button>
+<button class="px-3 py-1.5 bg-surface-container-high hover:bg-surface-bright text-on-surface text-xs font-medium rounded-sm border border-outline-variant/30 transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">share</span> Share
+                    </button>
+</div>
+</header>
+<!-- Split View Layout -->
+<div class="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+<!-- Left Column: Input & Test String -->
+<div class="flex-1 flex flex-col gap-4 min-w-0 min-h-0">
+<!-- Expression Editor Container -->
+<div class="bg-surface-container-low rounded-sm p-3 flex flex-col gap-2 border border-outline-variant/15 shrink-0">
+<div class="flex justify-between items-center">
+<label class="text-on-surface-variant font-label text-[10px] uppercase tracking-widest font-semibold">Expression</label>
+<span class="text-outline font-code text-[10px]">PCRE2</span>
+</div>
+<!-- Input Box with syntax highlighting simulation -->
+<div class="relative flex items-center bg-surface-container-lowest rounded-sm border border-outline-variant/30 focus-within:border-primary/50 focus-within:shadow-[0_0_0_1px_rgba(0,112,243,0.3)] transition-all">
+<div class="px-3 py-2.5 text-outline font-code text-sm select-none border-r border-outline-variant/20 bg-surface-container-high rounded-l-sm">/</div>
+<!-- The actual input -->
+<div class="flex-1 px-3 py-2.5 font-code text-sm overflow-x-auto whitespace-nowrap hide-scrollbar flex items-center">
+<!-- Syntax Highlighted Content -->
+<span class="text-secondary">(?&lt;</span><span class="text-tertiary">group_name</span><span class="text-secondary">&gt;</span><span class="text-primary-fixed-dim">[A-Z]</span><span class="text-error">+</span><span class="text-on-surface">)</span><span class="text-outline-variant">-</span><span class="text-secondary">\d</span><span class="text-error">{2,4}</span>
+</div>
+<div class="px-3 py-2.5 text-outline font-code text-sm select-none border-l border-outline-variant/20 bg-surface-container-high">/</div>
+<!-- Flags -->
+<div class="px-2 py-2.5 flex items-center gap-1 bg-surface-container-high rounded-r-sm h-full">
+<button class="w-6 h-6 flex items-center justify-center rounded text-xs font-code font-bold bg-primary-container text-on-primary-container" title="Global">g</button>
+<button class="w-6 h-6 flex items-center justify-center rounded text-xs font-code text-on-surface-variant hover:bg-surface-bright hover:text-on-surface transition-colors" title="Multiline">m</button>
+<button class="w-6 h-6 flex items-center justify-center rounded text-xs font-code text-on-surface-variant hover:bg-surface-bright hover:text-on-surface transition-colors" title="Case Insensitive">i</button>
+<button class="w-6 h-6 flex items-center justify-center rounded text-xs font-code text-on-surface-variant hover:bg-surface-bright hover:text-on-surface transition-colors" title="Single Line">s</button>
+</div>
+</div>
+</div>
+<!-- Test String Editor Container -->
+<div class="flex-1 bg-surface-container-low rounded-sm p-3 flex flex-col gap-2 border border-outline-variant/15 min-h-0">
+<div class="flex justify-between items-center shrink-0">
+<label class="text-on-surface-variant font-label text-[10px] uppercase tracking-widest font-semibold">Test String</label>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-on-surface text-[10px] uppercase tracking-wider font-medium px-2 py-1 rounded bg-surface-container-highest transition-colors">Clear</button>
+</div>
+</div>
+<!-- Editor Area -->
+<div class="flex-1 bg-surface-container-lowest rounded-sm border border-outline-variant/30 overflow-auto relative font-code text-sm leading-relaxed p-3">
+<div class="absolute left-0 top-0 bottom-0 w-8 bg-surface-container-high border-r border-outline-variant/20 flex flex-col items-end py-3 pr-2 text-outline text-xs select-none">
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+</div>
+<div class="pl-8 text-on-surface">
+                                UserID: <span class="bg-primary/20 text-primary-fixed-dim rounded-[2px] px-0.5 border-b border-primary/50">ADMIN-12</span> connected from 192.168.1.1<br/>
+                                Session active.<br/>
+                                UserID: <span class="bg-primary/20 text-primary-fixed-dim rounded-[2px] px-0.5 border-b border-primary/50">GUEST-4096</span> connected from 10.0.0.5<br/>
+                                Error: Invalid format for ID USER-A.<br/>
+                                UserID: <span class="bg-primary/20 text-primary-fixed-dim rounded-[2px] px-0.5 border-b border-primary/50">SYSTEM-01</span> initialized background task.<br/>
+                                Disconnected.
+                            </div>
+</div>
+</div>
+</div>
+<!-- Right Column: Matches Panel -->
+<div class="w-full lg:w-80 bg-surface-container-high rounded-sm border border-outline-variant/15 flex flex-col min-h-0 shrink-0">
+<div class="p-3 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low shrink-0 rounded-t-sm">
+<label class="text-on-surface-variant font-label text-[10px] uppercase tracking-widest font-semibold">Matches</label>
+<span class="text-xs font-code bg-surface-container-highest px-2 py-0.5 rounded text-secondary">3 found</span>
+</div>
+<div class="flex-1 overflow-y-auto p-2 flex flex-col gap-2">
+<!-- Match Item 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-sm overflow-hidden">
+<div class="px-3 py-2 border-b border-outline-variant/15 flex justify-between items-center bg-[#15152b]">
+<span class="font-code text-sm text-primary-fixed-dim font-medium">ADMIN-12</span>
+<span class="text-[10px] text-outline font-code">0-8</span>
+</div>
+<div class="px-3 py-2 flex flex-col gap-1">
+<div class="flex items-start gap-2">
+<span class="text-[10px] font-code text-secondary w-16 shrink-0 mt-0.5">group_name</span>
+<span class="font-code text-xs text-on-surface">ADMIN</span>
+</div>
+</div>
+</div>
+<!-- Match Item 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-sm overflow-hidden">
+<div class="px-3 py-2 border-b border-outline-variant/15 flex justify-between items-center bg-[#15152b]">
+<span class="font-code text-sm text-primary-fixed-dim font-medium">GUEST-4096</span>
+<span class="text-[10px] text-outline font-code">65-75</span>
+</div>
+<div class="px-3 py-2 flex flex-col gap-1">
+<div class="flex items-start gap-2">
+<span class="text-[10px] font-code text-secondary w-16 shrink-0 mt-0.5">group_name</span>
+<span class="font-code text-xs text-on-surface">GUEST</span>
+</div>
+</div>
+</div>
+<!-- Match Item 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-sm overflow-hidden">
+<div class="px-3 py-2 border-b border-outline-variant/15 flex justify-between items-center bg-[#15152b]">
+<span class="font-code text-sm text-primary-fixed-dim font-medium">SYSTEM-01</span>
+<span class="text-[10px] text-outline font-code">143-152</span>
+</div>
+<div class="px-3 py-2 flex flex-col gap-1">
+<div class="flex items-start gap-2">
+<span class="text-[10px] font-code text-secondary w-16 shrink-0 mt-0.5">group_name</span>
+<span class="font-code text-xs text-on-surface">SYSTEM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Ambient shadow element for structural depth behind the split view -->
+<div class="absolute inset-x-4 bottom-4 h-12 bg-surface-container-lowest blur-xl opacity-50 pointer-events-none -z-10"></div>
+</main>
+</div>
+<!-- Footer (From JSON) -->
+<footer class="bg-[#0b0b23] dark:bg-[#0b0b23] docked full-width bottom-0 h-6 border-t border-[#373751]/15 flat flex justify-between items-center px-3 w-full shrink-0 z-20">
+<span class="text-slate-500 font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest">DevUtils v2.4.0 • Connected</span>
+<div class="flex gap-4">
+<a class="text-slate-500 hover:text-slate-300 font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest transition-colors" href="#">System Status</a>
+<a class="text-slate-500 hover:text-slate-300 font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest transition-colors" href="#">API Reference</a>
+</div>
+</footer>
+</body></html>
