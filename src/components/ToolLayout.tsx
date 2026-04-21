@@ -1,4 +1,4 @@
-import { TOOLS } from '../lib/registry';
+import { getToolById } from '../lib/registry';
 
 interface Props {
   toolId: string;
@@ -6,16 +6,25 @@ interface Props {
 }
 
 export function ToolLayout({ toolId, children }: Props) {
-  const tool = TOOLS.find((t) => t.id === toolId);
+  const tool = getToolById(toolId);
+
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-gray-950 transition-colors">
-      <header className="flex-shrink-0 px-6 py-4 border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 transition-colors">
-        <h1 className="text-base font-semibold text-gray-900 dark:text-gray-100">{tool?.name}</h1>
-        {tool?.description && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{tool.description}</p>
-        )}
+    <section className="flex h-full min-h-0 flex-col">
+      <header className="shell-border mb-4 flex flex-wrap items-end justify-between gap-3 border-b pb-4">
+        <div>
+          <p className="label-technical shell-text-subtle">
+            {tool ? tool.category.replace(/^\w/, (c) => c.toUpperCase()) : 'Workspace'}
+          </p>
+          <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">{tool?.name ?? toolId}</h1>
+          {tool?.description && (
+            <p className="shell-text-muted mt-1 text-sm">{tool.description}</p>
+          )}
+        </div>
+        <div className="shell-border shell-panel-soft shell-text-subtle rounded-sm border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em]">
+          Offline-first
+        </div>
       </header>
-      <div className="flex-1 overflow-auto">{children}</div>
-    </div>
+      <div className="min-h-0 flex-1 overflow-hidden">{children}</div>
+    </section>
   );
 }

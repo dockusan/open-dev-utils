@@ -25,40 +25,34 @@ export function TwoPanel({
   return (
     <div
       className={cn(
-        "flex flex-col md:flex-row h-full w-full gap-4",
+        "flex h-full w-full min-h-0 flex-col gap-4 xl:flex-row",
         className
       )}
     >
-      {/* Left Panel */}
       <div
         className={cn(
-          "flex flex-col flex-1 border rounded-sm border-border bg-card text-card-foreground shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md",
+          "surface-low flex min-h-0 flex-1 flex-col overflow-hidden rounded-sm ghost-border",
           panelClassName
         )}
       >
-        <div className="flex h-12 items-center justify-between border-b px-4 bg-muted/20">
-          <h3 className="text-sm font-semibold tracking-tight">{leftTitle}</h3>
+        <div className="surface-panel shell-border flex h-9 items-center justify-between border-b px-3">
+          <h3 className="label-technical shell-text-muted">{leftTitle}</h3>
           <div className="flex items-center gap-2">{leftActions}</div>
         </div>
-        <div className="flex-1 overflow-hidden relative group">
-          {leftPanel}
-        </div>
+        <div className="surface-lowest relative flex-1 overflow-hidden">{leftPanel}</div>
       </div>
 
-      {/* Right Panel */}
       <div
         className={cn(
-          "flex flex-col flex-1 border rounded-sm border-border bg-card text-card-foreground shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md",
+          "surface-low flex min-h-0 flex-1 flex-col overflow-hidden rounded-sm ghost-border",
           panelClassName
         )}
       >
-        <div className="flex h-12 items-center justify-between border-b px-4 bg-muted/20">
-          <h3 className="text-sm font-semibold tracking-tight">{rightTitle}</h3>
+        <div className="surface-panel shell-border flex h-9 items-center justify-between border-b px-3">
+          <h3 className="label-technical shell-text-muted">{rightTitle}</h3>
           <div className="flex items-center gap-2">{rightActions}</div>
         </div>
-        <div className="flex-1 overflow-hidden relative group">
-          {rightPanel}
-        </div>
+        <div className="surface-lowest relative flex-1 overflow-hidden">{rightPanel}</div>
       </div>
     </div>
   );
