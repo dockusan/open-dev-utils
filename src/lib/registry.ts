@@ -82,6 +82,7 @@ export const TOOLS: ToolMeta[] = [
   { id: 'svg-to-css', name: 'SVG to CSS', category: 'converters', description: 'Convert SVG to CSS Data URI', keywords: ['svg', 'css', 'data', 'uri', 'convert'], icon: 'palette' },
   { id: 'curl-to-code', name: 'cURL to Code', category: 'converters', description: 'Convert cURL commands to code in various languages', keywords: ['curl', 'code', 'convert', 'http'], icon: 'terminal', featured: true, pinned: true },
   { id: 'json-to-code', name: 'JSON to Code', category: 'converters', description: 'Generate types/interfaces from JSON', keywords: ['json', 'code', 'types', 'interfaces', 'typescript'], icon: 'file-code' },
+  { id: 'sql-string-to-sql', name: 'SQL String to SQL', category: 'converters', description: 'Convert Java or JavaScript SQL strings into runnable SQL', keywords: ['sql', 'java', 'javascript', 'query', 'string', 'convert'], icon: 'terminal', featured: true },
   { id: 'hex-ascii', name: 'Hex ↔ ASCII', category: 'converters', description: 'Convert between Hex and ASCII text', keywords: ['hex', 'ascii', 'text', 'convert'], icon: 'binary' },
 
   { id: 'unix-time-converter', name: 'Unix Time Converter', category: 'inspect', description: 'Convert Unix timestamps to dates and vice-versa', keywords: ['unix', 'time', 'date', 'timestamp', 'epoch'], icon: 'clock', featured: true },

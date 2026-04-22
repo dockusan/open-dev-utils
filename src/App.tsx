@@ -45,6 +45,7 @@ import { MarkdownPreview } from './tools/MarkdownPreview';
 import { CronParser } from './tools/CronParser';
 import { ColorConverter } from './tools/ColorConverter';
 import { JsonRepair } from './tools/JsonRepair';
+import { SqlStringExtractor } from './tools/SqlStringExtractor';
 import { TOOLS } from './lib/registry';
 import { WorkspaceHome } from './screens/WorkspaceHome';
 import { SettingsScreen } from './screens/SettingsScreen';
@@ -83,6 +84,7 @@ const TOOL_COMPONENTS: Partial<Record<string, React.ReactElement>> = {
   'svg-to-css': <SvgToCss toolId="svg-to-css" />,
   'curl-to-code': <CurlToCode toolId="curl-to-code" />,
   'json-to-code': <JsonToCode toolId="json-to-code" />,
+  'sql-string-to-sql': <SqlStringExtractor toolId="sql-string-to-sql" />,
   'hex-ascii': <HexAscii toolId="hex-ascii" />,
   'unix-time-converter': <UnixTimeConverter toolId="unix-time-converter" />,
   'jwt-debugger': <JwtDebugger toolId="jwt-debugger" />,
