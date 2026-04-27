@@ -1,0 +1,66 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="188" y1="96" x2="836" y2="928" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E3A8A"/>
+      <stop offset="0.42" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#060817"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="230" y1="212" x2="794" y2="812" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1B2540"/>
+      <stop offset="1" stop-color="#0B1022"/>
+    </linearGradient>
+    <linearGradient id="leftMark" x1="268" y1="330" x2="434" y2="690" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67E8F9"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="rightMark" x1="590" y1="330" x2="756" y2="690" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#BFDBFE"/>
+      <stop offset="1" stop-color="#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="465" y1="318" x2="559" y2="706" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#86EFAC"/>
+      <stop offset="1" stop-color="#22C55E"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 228) rotate(48.3665) scale(628 524)">
+      <stop stop-color="#38BDF8" stop-opacity="0.42"/>
+      <stop offset="0.54" stop-color="#2563EB" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softShadow" x="24" y="28" width="976" height="1004" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="32"/>
+      <feGaussianBlur stdDeviation="28"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0117647 0 0 0 0 0.0156863 0 0 0 0 0.0392157 0 0 0 0.38 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="markGlow" x="199" y="266" width="626" height="492" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="blur"/>
+      <feOffset dy="12"/>
+      <feComposite in2="SourceAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.737255 0 0 0 0 1 0 0 0 0.2 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+  <g filter="url(#softShadow)">
+    <rect x="48" y="48" width="928" height="928" rx="224" fill="url(#bg)"/>
+    <rect x="48" y="48" width="928" height="928" rx="224" fill="url(#halo)"/>
+    <rect x="76" y="76" width="872" height="872" rx="196" stroke="white" stroke-opacity="0.1" stroke-width="56"/>
+  </g>
+  <rect x="176" y="192" width="672" height="640" rx="148" fill="url(#panel)" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="24"/>
+  <path d="M236 324C236 277.608 273.608 240 320 240H704C750.392 240 788 277.608 788 324V364H236V324Z" fill="#26324F" fill-opacity="0.72"/>
+  <circle cx="312" cy="302" r="24" fill="#60A5FA"/>
+  <circle cx="384" cy="302" r="24" fill="#2DD4BF"/>
+  <circle cx="456" cy="302" r="24" fill="#22C55E"/>
+  <g filter="url(#markGlow)">
+    <path d="M421 348L292 512L421 676" stroke="url(#leftMark)" stroke-width="88" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M603 348L732 512L603 676" stroke="url(#rightMark)" stroke-width="88" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M558 328L466 696" stroke="url(#accent)" stroke-width="78" stroke-linecap="round"/>
+  </g>
+  <path d="M278 766H746" stroke="#93C5FD" stroke-opacity="0.18" stroke-width="28" stroke-linecap="round"/>
+  <path d="M372 766H652" stroke="#67E8F9" stroke-opacity="0.3" stroke-width="28" stroke-linecap="round"/>
+</svg>
