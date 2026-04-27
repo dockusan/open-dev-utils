@@ -111,14 +111,14 @@ export function CommandPalette({ open, onClose, onSetTheme }: CommandPaletteProp
             placeholder="Search tools, commands, or settings..."
             className="shell-placeholder w-full bg-transparent text-base text-foreground outline-none"
           />
-          <span className="shell-border shell-text-subtle rounded-sm border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em]">
+          <span className="shell-border shell-text-subtle rounded-sm border px-1.5 py-0.5 font-mono text-[10px] uppercase">
             Esc
           </span>
         </div>
         <div className="max-h-[32rem] overflow-y-auto py-2">
           {Object.entries(grouped).map(([group, groupItems]) => (
             <div key={group} className="mb-2 px-2">
-              <div className="shell-text-subtle px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em]">
+              <div className="shell-text-subtle px-2 py-1 font-mono text-[10px] uppercase">
                 {group}
               </div>
               {groupItems.map((item, index) => (
@@ -135,7 +135,7 @@ export function CommandPalette({ open, onClose, onSetTheme }: CommandPaletteProp
                     <span className="text-sm font-medium">{item.label}</span>
                   </span>
                   {item.hint && (
-                    <span className="shell-text-subtle font-mono text-[10px] uppercase tracking-[0.18em]">
+                    <span className="shell-text-subtle font-mono text-[10px] uppercase">
                       {item.hint}
                     </span>
                   )}

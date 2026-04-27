@@ -1,4 +1,4 @@
-import { ArrowRight, LaptopMinimal, MoonStar, ShieldCheck, Sparkles, SunMedium, TerminalSquare, Wand2 } from 'lucide-react';
+import { ArrowRight, MoonStar, ShieldCheck, Sparkles, SunMedium, TerminalSquare, Wand2 } from 'lucide-react';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getFeaturedTools, TOOLS } from '../lib/registry';
@@ -23,6 +23,8 @@ const HIGHLIGHTS = [
   },
 ];
 
+const workspacePreview = new URL('../../assets/screenshots/workspace-dark.png', import.meta.url).href;
+
 export function LandingPage() {
   const navigate = useNavigate();
   const featured = getFeaturedTools().slice(0, 6);
@@ -35,12 +37,12 @@ export function LandingPage() {
     <div className="min-h-screen">
       <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         <button className="flex items-center gap-3 text-left" onClick={() => navigate('/landing')}>
-          <div className="flex h-10 w-10 items-center justify-center rounded-sm bg-primary text-primary-foreground shadow-sm">
+          <div className="flex h-10 w-10 items-center justify-center rounded-sm border border-primary/30 bg-primary/15 text-primary">
             <TerminalSquare className="h-5 w-5" />
           </div>
           <div>
             <div className="label-technical shell-text-subtle">Desktop utility suite</div>
-            <div className="text-base font-black tracking-tight text-foreground">OpenDevUtils</div>
+            <div className="text-base font-black text-foreground">OpenDevUtils</div>
           </div>
         </button>
 
@@ -54,7 +56,7 @@ export function LandingPage() {
           </button>
           <button
             onClick={() => navigate('/')}
-            className="gradient-cta inline-flex items-center gap-2 rounded-sm px-4 py-2 text-sm font-medium text-white"
+            className="gradient-cta inline-flex min-h-10 items-center gap-2 rounded-sm px-4 text-sm font-semibold text-primary-foreground"
           >
             Open workspace
             <ArrowRight className="h-4 w-4" />
@@ -63,71 +65,56 @@ export function LandingPage() {
       </header>
 
       <main className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 pb-12 pt-4 lg:px-10">
-        <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="surface-low shell-border relative overflow-hidden rounded-sm border p-8 lg:p-10">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,hsl(var(--primary)/0.18),transparent_34%),linear-gradient(140deg,hsl(var(--background)/0.06),transparent_55%)]" />
-            <div className="relative max-w-2xl">
-              <div className="label-technical shell-text-accent">Fast local workflows</div>
-              <h1 className="mt-4 max-w-xl text-5xl font-black tracking-[-0.04em] text-foreground sm:text-6xl">
-                A developer utility hub that feels like a native workbench.
-              </h1>
-              <p className="shell-text-muted mt-5 max-w-2xl text-base leading-7">
-                OpenDevUtils packages formatting, conversion, inspection, and generation tools into a single desktop shell. It is built for engineers who need quick, reliable transformations without shipping data to random websites.
-              </p>
+        <section className="relative min-h-[560px] overflow-hidden rounded-sm border border-white/10 bg-slate-950 sm:min-h-[620px] lg:min-h-[calc(100dvh-12rem)]">
+          <img
+            src={workspacePreview}
+            alt="OpenDevUtils workspace showing a developer utility dashboard"
+            className="absolute inset-0 h-full w-full object-cover object-center opacity-72"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.96)_0%,rgba(2,6,23,0.82)_36%,rgba(2,6,23,0.42)_72%,rgba(2,6,23,0.18)_100%)]" />
+          <div className="relative flex min-h-[560px] max-w-3xl flex-col justify-center px-6 py-12 sm:min-h-[620px] lg:min-h-[calc(100dvh-12rem)] lg:px-10">
+            <div className="label-technical text-emerald-300">Branch-green desktop workflows</div>
+            <h1 className="mt-4 max-w-2xl text-5xl font-black text-white sm:text-6xl">
+              OpenDevUtils workbench.
+            </h1>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-200">
+              Format, inspect, convert, and generate data in a local desktop shell with a sharper slate interface and green active states.
+            </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                <button
-                  onClick={() => navigate('/')}
-                  className="gradient-cta inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-white"
-                >
-                  Launch workspace
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-                <button
-                  onClick={() => navigate('/json-formatter')}
-                  className="surface-high shell-border shell-hover inline-flex items-center gap-2 rounded-sm border px-5 py-3 text-sm font-semibold text-foreground transition-colors"
-                >
-                  Try JSON Formatter
-                </button>
-              </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button
+                onClick={() => navigate('/')}
+                className="gradient-cta inline-flex min-h-11 items-center gap-2 rounded-sm px-5 text-sm font-semibold text-primary-foreground"
+              >
+                Launch workspace
+                <ArrowRight className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => navigate('/json-formatter')}
+                className="inline-flex min-h-11 items-center gap-2 rounded-sm border border-white/20 bg-white/10 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/15"
+              >
+                Try JSON Formatter
+              </button>
+            </div>
 
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                <MetricCard value={`${toolCount}+`} label="Utilities" />
-                <MetricCard value={`${categoryCount}`} label="Workflows" />
-                <MetricCard value="Desktop" label="Local-first shell" />
-              </div>
+            <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
+              <MetricCard value={`${toolCount}+`} label="Utilities" />
+              <MetricCard value={`${categoryCount}`} label="Workflows" />
+              <MetricCard value="Local" label="Desktop shell" />
             </div>
           </div>
+        </section>
 
-          <div className="space-y-4">
-            <div className="surface-lowest shell-border rounded-sm border p-5">
-              <div className="label-technical shell-text-accent">Why teams use it</div>
-              <div className="mt-4 space-y-4">
-                {HIGHLIGHTS.map((item) => (
-                  <div key={item.title} className="surface-low shell-border rounded-sm border p-4">
-                    <div className="shell-text-accent flex items-center gap-2">
-                      {item.icon}
-                      <span className="text-sm font-semibold text-foreground">{item.title}</span>
-                    </div>
-                    <p className="shell-text-muted mt-2 text-sm leading-6">{item.description}</p>
-                  </div>
-                ))}
+        <section className="grid gap-4 md:grid-cols-3">
+          {HIGHLIGHTS.map((item) => (
+            <div key={item.title} className="surface-low shell-border rounded-sm border p-5">
+              <div className="shell-text-accent flex items-center gap-2">
+                {item.icon}
+                <span className="text-sm font-semibold text-foreground">{item.title}</span>
               </div>
+              <p className="shell-text-muted mt-2 text-sm leading-6">{item.description}</p>
             </div>
-
-            <div className="surface-low shell-border rounded-sm border p-5">
-              <div className="label-technical shell-text-accent">Theme-aware shell</div>
-              <div className="mt-3 flex items-center gap-3">
-                <div className="surface-highest flex h-12 w-12 items-center justify-center rounded-sm text-primary">
-                  <LaptopMinimal className="h-5 w-5" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-foreground">Light and dark mode</div>
-                  <p className="shell-text-muted mt-1 text-sm">Carry the same dense desktop layout through bright or low-light environments.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </section>
 
         <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
@@ -141,10 +128,10 @@ export function LandingPage() {
                 <button
                   key={tool.id}
                   onClick={() => navigate(`/${tool.id}`)}
-                  className="surface-low shell-border shell-hover flex items-center justify-between rounded-sm border p-4 text-left transition-colors"
+                  className="surface-low shell-border shell-hover flex items-center justify-between rounded-sm border p-4 text-left transition-colors hover:border-primary/35"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="surface-highest shell-text-accent rounded-sm p-2">{renderToolIcon(tool)}</div>
+                    <div className="surface-bright shell-text-accent rounded-sm p-2 ring-1 ring-primary/20">{renderToolIcon(tool)}</div>
                     <div>
                       <div className="text-sm font-semibold text-foreground">{tool.name}</div>
                       <div className="shell-text-muted mt-1 text-sm">{tool.description}</div>
@@ -173,9 +160,9 @@ export function LandingPage() {
 
 function MetricCard({ value, label }: { value: string; label: string }) {
   return (
-    <div className="surface-lowest shell-border rounded-sm border p-4">
-      <div className="text-2xl font-black tracking-tight text-foreground">{value}</div>
-      <div className="shell-text-muted mt-1 text-sm">{label}</div>
+    <div className="rounded-sm border border-white/15 bg-white/10 p-4">
+      <div className="text-2xl font-black text-white">{value}</div>
+      <div className="mt-1 text-sm text-slate-200">{label}</div>
     </div>
   );
 }

@@ -7,95 +7,95 @@
 
 @layer base {
   :root {
-    --background: 231 41% 11%;
-    --foreground: 252 100% 94%;
-    --card: 236 33% 15%;
-    --card-foreground: 252 100% 94%;
-    --popover: 236 23% 24%;
-    --popover-foreground: 252 100% 94%;
-    --primary: 213 100% 81%;
-    --primary-foreground: 214 100% 21%;
-    --secondary: 186 51% 70%;
-    --secondary-foreground: 191 100% 12%;
-    --muted: 235 28% 20%;
-    --muted-foreground: 228 22% 80%;
-    --accent: 235 28% 20%;
-    --accent-foreground: 252 100% 94%;
-    --destructive: 5 100% 83%;
-    --destructive-foreground: 0 0% 18%;
-    --border: 231 13% 30%;
-    --input: 236 33% 15%;
-    --ring: 213 100% 61%;
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+    --card: 220 33% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 218 28% 15%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 142 71% 45%;
+    --primary-foreground: 222 47% 7%;
+    --secondary: 174 62% 41%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 218 24% 17%;
+    --muted-foreground: 215 20% 76%;
+    --accent: 147 35% 18%;
+    --accent-foreground: 145 78% 78%;
+    --destructive: 0 77% 63%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 216 18% 25%;
+    --input: 220 33% 11%;
+    --ring: 142 71% 45%;
     --radius: 0.25rem;
-    --sidebar: 240 33% 11%;
-    --sidebar-foreground: 252 100% 94%;
-    --sidebar-primary: 210 100% 47%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 235 28% 20%;
-    --sidebar-accent-foreground: 252 100% 94%;
-    --sidebar-border: 231 13% 30%;
-    --sidebar-ring: 213 100% 61%;
+    --sidebar: 222 47% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 142 71% 45%;
+    --sidebar-primary-foreground: 222 47% 7%;
+    --sidebar-accent: 147 35% 18%;
+    --sidebar-accent-foreground: 145 78% 78%;
+    --sidebar-border: 216 18% 25%;
+    --sidebar-ring: 142 71% 45%;
     --font-heading: 'Inter', sans-serif;
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
-    --canvas-end: 238 52% 9%;
-    --shell-muted: 228 22% 80%;
-    --shell-muted-strong: 228 18% 66%;
-    --shell-accent: 186 51% 70%;
-    --shell-accent-strong: 213 100% 81%;
-    --shell-brand: 212 100% 47%;
-    --shell-panel-border: 255 255 255 / 0.1;
-    --shell-hover: 255 255 255 / 0.08;
-    --shell-badge: 255 255 255 / 0.08;
-    --shell-overlay: 5 8 20 / 0.5;
-    --shell-glass: 55 55 81 / 0.8;
-    --shell-shadow: 17 17 41 / 0.4;
-    --shell-scroll-track: 11 11 35;
-    --shell-scroll-thumb: 50 50 76;
+    --canvas-end: 218 48% 9%;
+    --shell-muted: 215 20% 76%;
+    --shell-muted-strong: 215 14% 60%;
+    --shell-accent: 145 78% 64%;
+    --shell-accent-strong: 158 64% 52%;
+    --shell-brand: 142 71% 45%;
+    --shell-panel-border: 148 163 184 / 0.14;
+    --shell-hover: 34 197 94 / 0.1;
+    --shell-badge: 34 197 94 / 0.14;
+    --shell-overlay: 2 6 23 / 0.6;
+    --shell-glass: 15 23 42 / 0.9;
+    --shell-shadow: 2 6 23 / 0.38;
+    --shell-scroll-track: 15 23 42;
+    --shell-scroll-thumb: 51 65 85;
   }
 
   .light {
-    --background: 220 23% 96%;
-    --foreground: 229 34% 12%;
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 229 34% 12%;
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 229 34% 12%;
-    --primary: 212 100% 42%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 142 72% 32%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 189 46% 35%;
+    --secondary: 174 62% 32%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 220 18% 91%;
-    --muted-foreground: 224 12% 40%;
-    --accent: 220 18% 91%;
-    --accent-foreground: 229 34% 12%;
-    --destructive: 2 72% 47%;
+    --muted: 210 25% 93%;
+    --muted-foreground: 215 16% 36%;
+    --accent: 144 45% 92%;
+    --accent-foreground: 145 63% 22%;
+    --destructive: 0 72% 47%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 15% 83%;
+    --border: 214 22% 84%;
     --input: 0 0% 100%;
-    --ring: 212 100% 42%;
-    --sidebar: 223 24% 94%;
-    --sidebar-foreground: 229 34% 12%;
-    --sidebar-primary: 212 100% 42%;
+    --ring: 142 72% 32%;
+    --sidebar: 210 29% 95%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 142 72% 32%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 18% 91%;
-    --sidebar-accent-foreground: 229 34% 12%;
-    --sidebar-border: 220 15% 83%;
-    --sidebar-ring: 212 100% 42%;
-    --canvas-end: 214 38% 90%;
-    --shell-muted: 224 16% 34%;
-    --shell-muted-strong: 224 10% 46%;
-    --shell-accent: 189 46% 35%;
-    --shell-accent-strong: 212 100% 42%;
-    --shell-brand: 212 100% 42%;
-    --shell-panel-border: 34 45 67 / 0.11;
-    --shell-hover: 34 45 67 / 0.06;
-    --shell-badge: 34 45 67 / 0.08;
-    --shell-overlay: 148 163 184 / 0.28;
+    --sidebar-accent: 144 45% 92%;
+    --sidebar-accent-foreground: 145 63% 22%;
+    --sidebar-border: 214 22% 84%;
+    --sidebar-ring: 142 72% 32%;
+    --canvas-end: 150 30% 94%;
+    --shell-muted: 215 16% 36%;
+    --shell-muted-strong: 215 12% 48%;
+    --shell-accent: 145 63% 33%;
+    --shell-accent-strong: 158 64% 34%;
+    --shell-brand: 142 72% 32%;
+    --shell-panel-border: 15 23 42 / 0.12;
+    --shell-hover: 22 163 74 / 0.08;
+    --shell-badge: 22 163 74 / 0.12;
+    --shell-overlay: 15 23 42 / 0.26;
     --shell-glass: 255 255 255 / 0.86;
-    --shell-shadow: 148 163 184 / 0.24;
-    --shell-scroll-track: 227 232 243;
-    --shell-scroll-thumb: 180 188 205;
+    --shell-shadow: 15 23 42 / 0.14;
+    --shell-scroll-track: 226 232 240;
+    --shell-scroll-thumb: 148 163 184;
   }
 
   * {
@@ -116,7 +116,7 @@
   body {
     @apply bg-background text-foreground antialiased;
     background-image:
-      radial-gradient(circle at top left, hsl(213 100% 61% / 0.08), transparent 28%),
+      linear-gradient(115deg, hsl(var(--shell-brand) / 0.11), transparent 32%),
       linear-gradient(180deg, hsl(var(--background)), hsl(var(--canvas-end)));
   }
 
@@ -152,7 +152,7 @@
   }
 
   .surface-bright {
-    background: hsl(var(--accent) / 0.85);
+    background: hsl(var(--primary) / 0.14);
   }
 
   .ghost-border {
@@ -169,12 +169,11 @@
   }
 
   .gradient-cta {
-    background-image: linear-gradient(135deg, hsl(var(--shell-accent-strong)), hsl(var(--shell-brand)));
+    background-image: linear-gradient(135deg, hsl(var(--shell-brand)), hsl(var(--shell-accent-strong)));
   }
 
   .label-technical {
     font-size: 10px;
-    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
