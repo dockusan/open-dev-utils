@@ -61,13 +61,13 @@ jobs:
           prerelease: false
           args: ${{ matrix.args }}
 
-      - name: Upload artifacts
+      - name: Upload artifacts (dev builds only)
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/upload-artifact@v4
         with:
           name: opendevutils-${{ matrix.platform }}
           path: |
             src-tauri/target/${{ matrix.platform == 'macos-latest' && 'universal-apple-darwin/' || '' }}release/bundle/msi/*.msi
-            src-tauri/target/${{ matrix.platform == 'macos-latest' && 'universal-apple-darwin/' || '' }}release/bundle/setup.exe
             src-tauri/target/${{ matrix.platform == 'macos-latest' && 'universal-apple-darwin/' || '' }}release/bundle/dmg/*.dmg
             src-tauri/target/${{ matrix.platform == 'macos-latest' && 'universal-apple-darwin/' || '' }}release/bundle/appimage/*.AppImage
             src-tauri/target/${{ matrix.platform == 'macos-latest' && 'universal-apple-darwin/' || '' }}release/bundle/deb/*.deb
